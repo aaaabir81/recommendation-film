@@ -4,7 +4,7 @@
 
 **Backend (Laravel)**
 1. Démarrez Apache et MySQL depuis le panneau de contrôle XAMPP.
-2. Configurez la base de données : accédez à phpMyAdmin via http://localhost/phpmyadmin. Créez une nouvelle base de données nommée `crud_utenti`.
+2. Configurez la base de données : accédez à phpMyAdmin via http://localhost/phpmyadmin. Créez une nouvelle base de données nommée `film-app`.
 3. Installez les dépendances Laravel avec la commande : `composer install`.
 4. Configurez le fichier `.env` pour la connexion à la base de données si le nom est différent.
 5. Générez les clés de l'application avec la commande : `php artisan key:generate`.
