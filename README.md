@@ -1,57 +1,25 @@
-# Progetto user management - Frontend Angular & Backend Laravel
 
-Questo progetto consente di gestire una lista di utenti tramite un backend Laravel e un frontend Angular. L'applicazione richiede l'installazione manuale degli ambienti di sviluppo.
 
----
+## Configurations
 
-## Requisiti
-
-Per eseguire l'applicazione, è necessario installare i seguenti software:
-
-1. **Backend (Laravel)**
-   - [PHP (versione 8.1 o superiore)](https://www.php.net/downloads)
-   - [Composer](https://getcomposer.org/download/)
-   - [MySQL](https://dev.mysql.com/downloads/) (incluso in XAMPP)
-   - [XAMPP](https://www.apachefriends.org/it/index.html) (opzionale, fornisce Apache e MySQL)
-
-2. **Frontend (Angular)**
-   - [Node.js (versione 18 o superiore)](https://nodejs.org/)
-   - [Angular CLI](https://angular.io/cli)
-
-3. **Git**
-   - [Git](https://git-scm.com/)
-
----
-
-## Clonazione del Repository
-
-1. Clona il repository sul tuo computer:
-
-   ```bash
-   git clone <URL_DEL_REPOSITORY>
-   cd <NOME_CARTELLA_REPOSITORY>
-
-## Configurazioni
-
- **Backend (Laravel)**
-1. Avvia Apache e MySQL dal pannell controllo XAMPP
-2. Configura Database, Accedi a phpMyAdmin: http://localhost/phpmyadmin. Crea un nuovo database chiamato crud_utenti.
-3. Installa dipendenze Laravel comando: composer install
-4. Configura file env per la connessione al db se nome diverso
-5. Genera le chiavi dell'applicazione comando: php artisan key:generate
-6. Esegui migrazione database comando: php artisan migrate 
-7. Avvia server  comando: php artisan serve 
+**Backend (Laravel)**
+1. Démarrez Apache et MySQL depuis le panneau de contrôle XAMPP.
+2. Configurez la base de données : accédez à phpMyAdmin via http://localhost/phpmyadmin. Créez une nouvelle base de données nommée `crud_utenti`.
+3. Installez les dépendances Laravel avec la commande : `composer install`.
+4. Configurez le fichier `.env` pour la connexion à la base de données si le nom est différent.
+5. Générez les clés de l'application avec la commande : `php artisan key:generate`.
+6. Exécutez les migrations de la base de données avec la commande : `php artisan migrate`.
+7. Démarrez le serveur avec la commande : `php artisan serve`.
 
 **Frontend (Angular)**
-1. Scarica ed installa Node.js
-2. Installa angular CLI comando:npm install -g @angular/cli
-3. Installa le dipendenze accedi alla directory frontend ed esegui comando: npm install
-4. Se neccessario configura url del backend nel file src/environments/environment.ts
-5. Avvia server comando:ng serve
-
+1. Téléchargez et installez Node.js.
+2. Installez Angular CLI avec la commande : `npm install -g @angular/cli`.
+3. Installez les dépendances : accédez au répertoire frontend et exécutez la commande : `npm install`.
+4. Si nécessaire, configurez l'URL du backend dans le fichier `src/environments/environment.ts`.
+5. Démarrez le serveur avec la commande : `ng serve`.
 
 **Test**
-1. Avvia server backend
-2. Avvia server frontend
-3. AprApri il browser e accedi all'indirizzo http://localhost:4200.
-4. Verifica che sia possibile:Visualizzare la lista degli utenti, aggiungere, visualizzare, modificare e cancellare un utente.
+1. Démarrez le serveur backend.
+2. Démarrez le serveur frontend.
+3. Ouvrez le navigateur et accédez à l'adresse http://localhost:4200.
+4. Vérifiez qu'il est possible de : visualiser la liste des utilisateurs, ajouter, consulter, modifier et supprimer un utilisateur.
