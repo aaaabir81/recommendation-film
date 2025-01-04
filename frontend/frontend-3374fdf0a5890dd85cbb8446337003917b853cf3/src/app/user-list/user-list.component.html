@@ -1,0 +1,52 @@
+<div class="title-container">
+  <h2 class="mat-headline"><mat-icon (click)="onIconClick()" >home</mat-icon>Tabella Utenti</h2>
+  <div class="add-button">
+    <button mat-raised-button color="primary" (click)="addUser()">
+      <mat-icon>add</mat-icon> Aggiungi Utente
+    </button>
+  </div>
+</div>
+
+<mat-table [dataSource]="users" matSort class="mat-elevation-z8 table-container">
+  <ng-container matColumnDef="first_name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{ user.first_name }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="last_name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Cognome </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{ user.last_name }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="created_at">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Data Creazione </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{ user.created_at | date:'dd/MM/yyyy - H:mm'}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="updated_at">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Ultima Modifica </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{ user.updated_at | date:'dd/MM/yyyy - H:mm'}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> Azioni </mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <button mat-icon-button [routerLink]="['/user', user.id]" aria-label="Dettagli" title="Dettagli">
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button mat-icon-button [routerLink]="['/user-form', user.id]" aria-label="Modifica" title="Modifica">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteUser(user.id)" aria-label="Elimina" title="Elimina">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

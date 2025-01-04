@@ -1,0 +1,52 @@
+
+<div class="form-container">
+  <h2 class="mat-headline">{{ isEditMode ? 'Modifica Utente' + ' nº(' + userId + ')' : 'Aggiungi Nuovo Utente' }}</h2>
+
+  <mat-card class="user-form-card">
+    <mat-card-content>
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="form-item">
+          <mat-icon>person</mat-icon>
+          <div class="form-field">
+            <label for="first_name">Nome:</label>
+            <input id="first_name" type="text" formControlName="first_name" placeholder="Inserisci il nome" />
+            <small *ngIf="userForm.controls['first_name'].invalid && userForm.controls['first_name'].touched"
+              class="error">
+              Il nome è obbligatorio.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-item">
+          <mat-icon>person_add</mat-icon>
+          <div class="form-field">
+            <label for="last_name">Cognome:</label>
+            <input id="last_name" type="text" formControlName="last_name" placeholder="Inserisci il cognome" />
+            <small *ngIf="userForm.controls['last_name'].invalid && userForm.controls['last_name'].touched"
+              class="error">
+              Il cognome è obbligatorio.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-item">
+          <mat-icon>email</mat-icon>
+          <div class="form-field">
+            <label for="email">Email:</label>
+            <input id="email" type="email" formControlName="email" placeholder="Inserisci l'email" />
+            <small *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched" class="error">
+              Inserisci un'email valida.
+            </small>
+          </div>
+        </div>
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
+            {{ isEditMode ? 'Aggiorna' : 'Aggiungi' }}
+          </button>
+          <button mat-raised-button color="warn" type="button" (click)="onCancel()">Annulla</button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
