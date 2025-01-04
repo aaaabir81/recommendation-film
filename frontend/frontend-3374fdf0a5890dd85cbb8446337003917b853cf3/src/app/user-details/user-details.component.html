@@ -1,0 +1,28 @@
+<div class="details-container">
+  <h2 class="mat-headline">Dettagli Utente nº({{user?.id}})</h2>
+
+  <mat-card class="user-details-card">
+    <mat-card-content>
+      <div class="detail-item">
+        <mat-icon>person</mat-icon>
+        <p><strong>Nome:</strong> {{ user?.first_name }}</p>
+      </div>
+
+      <div class="detail-item">
+        <mat-icon>person_add</mat-icon>
+        <p><strong>Cognome:</strong> {{ user?.last_name }}</p>
+      </div>
+
+      <div class="detail-item">
+        <mat-icon>email</mat-icon>
+        <p><strong>Email:</strong> {{ user?.email }}</p>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" routerLink="/user-list" (click)="onLinkClick()">
+        <mat-icon>arrow_back</mat-icon> Torna all'elenco
+        utenti</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,21 @@
+<mat-card class="dialog-card">
+    <mat-card-header>
+        <mat-card-title>
+            <h2 mat-dialog-title>{{ data.title }}</h2>
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <mat-dialog-content>
+            {{ data.message }}
+        </mat-dialog-content>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+        <mat-dialog-actions *ngIf="data.showButtons ? true : false">
+            <button mat-raised-button (click)="onSubmit()" class="confirm-button">{{ data.confirmButtonText }}</button>
+            <button mat-raised-button (click)="onCancel()" class="cancel-button">{{ data.cancelButtonText }}</button>
+        </mat-dialog-actions>
+    </mat-card-actions>
+
+</mat-card>

@@ -1,0 +1,22 @@
+.dialog-card {
+    width: 400px;
+    margin: auto;
+    padding: 16px;
+    background-color: var(--background-color, white);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.dialog-card h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: var(--primary-color, #3f51b5);
+}
+
+.confirm-button {
+    color: var(--confirm-color, #4caf50);
+}
+
+.cancel-button {
+    color: var(--cancel-color, #f44336);
+}
