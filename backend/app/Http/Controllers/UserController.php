@@ -2,107 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $users = User::all();
-        Log::info('Elenco degli utenti recuperato', ['users' => $users]);
-        return response()->json($users);
+        return response()->json(User::all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function show($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            return response()->json($user);
+        }
+        return response()->json(['message' => 'User not found'], 404);
+    }
+
     public function store(Request $request)
     {
-        Log::info('Dati della richiesta per la creazione di un utente', ['request' => $request->all()]);
-
-        $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
+        $request->validate([
+            'fname' => 'required|string',
+            'lname' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:6',
+            'birth_date' => 'required|date',
+            'genre' => 'required|string',
+            'preferred_type' => 'required|string',
         ]);
 
-        $user = User::create([
-            'first_name' => $validatedData['first_name'],
-            'last_name' => $validatedData['last_name'],
-            'email' => $validatedData['email'],
-        ]);
-
-        Log::info('Utente creato con successo', ['user' => $user]);
-
-        return response()->json([
-            'message' => 'User created successfully',
-            'user' => $user,
-        ], 201);
+        $user = User::create($request->all());
+        return response()->json($user, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        Log::info('Dettagli dell\'utente recuperati', ['user' => $user]);
-        return response()->json($user);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        Log::info('Dati della richiesta per l\'aggiornamento di un utente', ['request' => $request->all()]);
-
-        $request->validate(
-            [
-                'first_name' => ['required', 'string', 'max:255'],
-                'last_name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'email'],
-            ],
-            [
-                'first_name.required' => 'Il nome è obbligatorio.',
-                'last_name.required' => 'Il cognome è obbligatorio.',
-                'email.required' => 'L\'email è obbligatoria.',
-                'email.email' => 'Devi inserire un\'email valida.',
-            ]
-        );
-
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         if (!$user) {
-            Log::error('Utente non trovato', ['id' => $id]);
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->email = $request->email;
-        $user->save();
-
-        Log::info('Utente aggiornato con successo', ['user' => $user]);
-
+        $user->update($request->all());
         return response()->json($user);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        Log::info('Richiesta di eliminazione dell\'utente', ['id' => $id]);
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
 
-        User::destroy($id);
-
-        Log::info('Utente eliminato con successo', ['id' => $id]);
-
-        return response()->json(null, 204);
+        $user->delete();
+        return response()->json(['message' => 'User deleted successfully']);
     }
 }

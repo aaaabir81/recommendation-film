@@ -1,0 +1,38 @@
+<form (ngSubmit)="onSubmit()" #userForm="ngForm">
+  <div>
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" [(ngModel)]="fname" name="fname" required>
+  </div>
+
+  <div>
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" [(ngModel)]="lname" name="lname" required>
+  </div>
+
+  <div>
+    <label for="email">Email</label>
+    <input type="email" id="email" [(ngModel)]="email" name="email" required>
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input type="password" id="password" [(ngModel)]="password" name="password" required>
+  </div>
+
+  <div>
+    <label for="birth_date">Date of Birth</label>
+    <input type="date" id="birth_date" [(ngModel)]="birth_date" name="birth_date" required>
+  </div>
+
+  <div>
+    <label for="genre">Genre</label>
+    <input type="text" id="genre" [(ngModel)]="genre" name="genre" required>
+  </div>
+
+  <div>
+    <label for="preferred_type">Preferred Type</label>
+    <input type="text" id="preferred_type" [(ngModel)]="preferred_type" name="preferred_type" required>
+  </div>
+
+  <button type="submit" [disabled]="!userForm.valid">Add User</button>
+</form>
