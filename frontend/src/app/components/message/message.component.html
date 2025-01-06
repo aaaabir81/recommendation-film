@@ -1,4 +1,3 @@
 <div [ngClass]="{'incoming': model.direction === 'incoming', 'outgoing': model.direction === 'outgoing'}">
-    <p>{{ model.message }}</p>
-  </div>
-  
+  <p [ngStyle]="{'background-color': model.direction === 'incoming' ? '#f1f1f1' : '#007bff', 'color': model.direction === 'incoming' ? 'black' : 'white'}">{{ model.message }}</p>
+</div>
