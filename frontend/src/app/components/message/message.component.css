@@ -1,0 +1,34 @@
+
+  
+  /* Styles pour les messages entrants */
+  .incoming {
+    background-color: #f1f1f1; /* Couleur de fond pour les messages entrants */
+    border-radius: 15px 15px 15px 0;
+    padding: 10px;
+    margin: 5px 0;
+    max-width: 70%;
+    align-self: flex-start;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+  }
+  
+  /* Styles pour les messages sortants */
+  .outgoing {
+    background-color: #007bff; /* Couleur de fond pour les messages sortants */
+    color: white;
+    border-radius: 15px 15px 0 15px;
+    padding: 10px;
+    margin: 5px 0;
+    max-width: 70%;
+    align-self: flex-end;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    margin-left: auto; /* Aligner les messages sortants à droite */
+  }
+  
+  /* Pour centrer le texte et le mettre en valeur */
+  .incoming p, .outgoing p {
+    margin: 0;
+    font-size: 14px;
+  }
+  

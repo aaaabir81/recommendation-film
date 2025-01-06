@@ -15,11 +15,12 @@ import { FormsModule } from '@angular/forms';
 })
 export class DiscussionComponent {
   messages = [
-    { message: "Hello, I'm HelpMate! Ask me anything!", sentTime: "just now", sender: "HelpMate" }
+    { message: "Hello, I'm HelpMate! Ask me anything!", sentTime: "just now", sender: "HelpMate" , direction: "incoming"}
   ];
   inputValue = '';
   isTyping = false;
   API_KEY = "votre_api_key";
+  discussionsHistory = ["Discussion 1", "Discussion 2"];
 
   constructor(private http: HttpClient) {}
 
@@ -31,6 +32,7 @@ export class DiscussionComponent {
     this.inputValue = '';
     this.isTyping = true;
     this.processMessageToHelpMate(this.messages);
+
   }
 
   processMessageToHelpMate(chatMessages: any[]) {
@@ -67,18 +69,21 @@ export class DiscussionComponent {
       next: (data) => {
         this.messages = [
           ...chatMessages,
-          { message: data.choices[0]?.message?.content || "No response from HelpMate.", sender: "HelpMate" },
+          { message: data.choices[0]?.message?.content || "No response from HelpMate.", sender: "HelpMate" , direction: "incoming"},
         ];
         this.isTyping = false;
+        
       },
       error: (error) => {
         console.error("Error:", error);
         this.messages = [
           ...chatMessages,
-          { message: "An error occurred. Please try again later.", sender: "HelpMate" },
+          { message: "An error occurred. Please try again later.", sender: "HelpMate" ,direction: "incoming"},
         ];
         this.isTyping = false;
       }
     });
   }
+
+  addToHistory(discussion: string) { this.discussionsHistory.push(discussion); }
 }

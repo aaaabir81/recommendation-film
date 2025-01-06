@@ -1,17 +1,25 @@
-<div class="bg-[#5B6E68] w-full flex py-20 justify-center">
-    <div class="w-[90%]">
-      <div class="px-4 py-2 justify-between items-center space-y-6">
-        <h2 class="text-lg font-semibold text-white">New Prompt</h2>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow-md space-y-4 h-[400px] overflow-y-auto">
-        <ng-container *ngFor="let message of messages">
-          <app-message [model]="message"></app-message>
-        </ng-container>
-      </div>
-      <div class="flex mt-4">
-        <input type="text" class="flex-1 px-4 py-2 rounded-l-lg border-t border-b border-l focus:outline-none" placeholder="Type your message..." [(ngModel)]="inputValue" (keydown.enter)="handleSend()" />
-        <button class="bg-blue-500 text-white px-4 py-2 rounded-r-lg" (click)="handleSend()">Send</button>
-      </div>
+<div class="container w-full flex py-20 px-4">
+  <!-- Section Historique -->
+  <div class="history w-1/4  p-4 rounded-lg shadow-md space-y-4 mr-4">
+    <h2 class="text-lg font-semibold text-white">Historique</h2>
+    <ul>
+      <li *ngFor="let history of discussionsHistory" class="p-2 bg-white rounded-md shadow-sm mb-2">
+        {{ history }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Section Discussion -->
+  <div class="discussion w-3/4 flex flex-col p-4 rounded-lg shadow-md" style="min-height: 600px;"> <!-- Ajout de min-height -->
+    <h2 class="text-lg font-semibold text-white mb-4">New Prompt</h2>
+    <div class="bg-red-950 p-4 rounded-lg shadow-md space-y-4 h-[400px] overflow-y-auto flex-1">
+      <ng-container *ngFor="let message of messages">
+        <app-message [model]="message"></app-message>
+      </ng-container>
+    </div>
+    <div class="flex mt-4">
+      <input type="text" class="flex-1 px-4 py-2 rounded-l-lg border-t border-b border-l focus:outline-none" placeholder="Type your message..." [(ngModel)]="inputValue" (keydown.enter)="handleSend()" />
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-r-lg" (click)="handleSend()">Send</button>
     </div>
   </div>
-  
+</div>

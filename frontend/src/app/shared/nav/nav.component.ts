@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 import { MatIconModule } from '@angular/material/icon';
 
-
+import { Router } from '@angular/router';
 
 @Component({
 
@@ -19,4 +19,6 @@ import { MatIconModule } from '@angular/material/icon';
 
 })
 
-export class AppNavComponent { }
+export class AppNavComponent {
+  constructor(private router: Router) { } navigateToDiscussion() { this.router.navigate(['/discussion']); }
+ }
