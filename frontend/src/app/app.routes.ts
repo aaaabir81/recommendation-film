@@ -4,6 +4,7 @@ import { MoviesListComponent } from './dashboard/movies-list/movies-list.compone
 import { AddUserComponent } from './add-user/add-user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailComponent } from './pages/detail/detail.component';
+import { DiscussionComponent } from './pages/discussion/discussion.component';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'movies-list', pathMatch: 'full' }, // Ajoute la redirection
       { path: 'movies-list', component: MoviesListComponent },
+      {path: 'discussion', component: DiscussionComponent},
   { path: 'detail/:id', component: DetailComponent },
 
     ]
