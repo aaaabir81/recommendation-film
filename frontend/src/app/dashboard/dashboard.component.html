@@ -1,0 +1,36 @@
+<mat-sidenav-container class="container ">
+  <mat-sidenav #sidebar mode="side" opened>
+    <app-nav></app-nav>
+  </mat-sidenav>
+  <!-- Body -->
+  <mat-sidenav-content>
+    <div class="content">
+      <div class="toolbar">
+          <mat-toolbar>
+            <!-- Menu Icon on the left -->
+            <mat-icon (click)="sidebar.toggle()">menu</mat-icon>
+            
+            <!-- Logo in the center, with click event to navigate to movies-list -->
+            <div class="logo" (click)="goToHome()">
+              <img src="../../assets/logo_cinechill.png" alt="Logo" class="h-16 bg-[#400000]" />
+            </div>
+
+            <!-- Right side content (Icons) -->
+            <div class="box">
+              <mat-icon>bookmark</mat-icon>
+              <mat-icon>favorite</mat-icon>
+              <mat-icon>login</mat-icon>
+              <div (click)="onSearchBarClick()">
+                  <search-bar></search-bar>
+              </div>
+            </div>
+          </mat-toolbar>
+      </div>
+
+      <div class="main">
+          <router-outlet></router-outlet>
+      </div>
+
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
