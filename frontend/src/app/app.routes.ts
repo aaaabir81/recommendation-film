@@ -5,12 +5,17 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailComponent } from './pages/detail/detail.component';
 import { DiscussionComponent } from './pages/discussion/discussion.component';
+import { LoginComponent } from './pages/login/login.component';
+
+
 
 export const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
     children: [
+      { path: 'login', component: LoginComponent }, // Ajout de la route pour le login
+
       { path: '', redirectTo: 'movies-list', pathMatch: 'full' }, // Ajoute la redirection
       { path: 'movies-list', component: MoviesListComponent },
       {path: 'discussion', component: DiscussionComponent},

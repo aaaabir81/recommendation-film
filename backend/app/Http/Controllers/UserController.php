@@ -58,4 +58,32 @@ class UserController extends Controller
         $user->delete();
         return response()->json(['message' => 'User deleted successfully']);
     }
+
+    public function login(Request $request)
+    {
+        // Valider les données d'entrée
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+    
+        // Rechercher l'utilisateur par email
+        $user = User::where('email', $request->email)->first();
+    
+        // Vérifier si l'utilisateur existe et si le mot de passe est correct (sans hashage)
+        if (!$user || $user->password !== $request->password) {
+            return response()->json(['message' => 'Identifiants invalides'], 401);
+        }
+    
+        // Générer un token d'authentification
+        $token = $user->createToken('authToken')->plainTextToken;
+    
+        // Retourner les données utilisateur et le token
+        return response()->json([
+            'message' => 'Connexion réussie',
+            'user' => $user,
+            'token' => $token,
+        ]);
+    }
+
 }

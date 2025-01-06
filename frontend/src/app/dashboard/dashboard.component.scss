@@ -16,6 +16,8 @@ mat-sidenav-content {
   padding: 20px;
 }
 
+
+
 mat-toolbar {
   background-color: #400000; /* Fond plus sombre pour la toolbar */
   color: white;
@@ -69,13 +71,23 @@ mat-icon {
   }
 
   .main {
-    margin-left: 0; /* Supprimer la marge gauche quand la sidebar est cachée */
+    margin-left: 0;
+    width: 100%; /* Supprimer la marge gauche quand la sidebar est cachée */
   }
 
   mat-toolbar {
     justify-content: space-between;
     height: 56px; /* Hauteur réduite de la toolbar sur mobile */
   }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  
 
   .box {
     display: none; /* Masquer les éléments qui ne sont pas nécessaires sur mobile */
