@@ -1,0 +1,17 @@
+<div class="bg-[#5B6E68] w-full flex py-20 justify-center">
+    <div class="w-[90%]">
+      <div class="px-4 py-2 justify-between items-center space-y-6">
+        <h2 class="text-lg font-semibold text-white">New Prompt</h2>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md space-y-4 h-[400px] overflow-y-auto">
+        <ng-container *ngFor="let message of messages">
+          <app-message [model]="message"></app-message>
+        </ng-container>
+      </div>
+      <div class="flex mt-4">
+        <input type="text" class="flex-1 px-4 py-2 rounded-l-lg border-t border-b border-l focus:outline-none" placeholder="Type your message..." [(ngModel)]="inputValue" (keydown.enter)="handleSend()" />
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-r-lg" (click)="handleSend()">Send</button>
+      </div>
+    </div>
+  </div>
+  

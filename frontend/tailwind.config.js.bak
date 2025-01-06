@@ -1,0 +1,9 @@
+module.exports = {
+  content: [
+    "./src/**/*.{html,ts}", // Recherche les classes Tailwind dans tous les fichiers HTML et TypeScript sous src/
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};

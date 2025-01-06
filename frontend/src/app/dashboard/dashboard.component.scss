@@ -1,0 +1,116 @@
+mat-sidenav-container {
+  display: flex;
+  height: 100vh;
+}
+
+mat-sidenav {
+  width: 250px;
+  height: 100%;
+  color: white;
+}
+
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 20px;
+}
+
+mat-toolbar {
+  background-color: #400000; /* Fond plus sombre pour la toolbar */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  height: 64px; /* Hauteur standard de la toolbar */
+}
+
+mat-icon {
+  background-color: #400000;
+  margin-left: 15px;
+  color: #608299;
+  cursor: pointer;
+}
+
+.box {
+  background-color: #400000;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-right: 50px; /* Ajoute de l'espace à gauche */
+}
+
+
+
+
+.search-bar {
+  margin-left: 10px;
+}
+
+.main {
+  padding: 20px;
+  flex-grow: 1; /* Assurez-vous que le contenu occupe tout l'espace restant */
+}
+
+/* Adapter pour les écrans plus petits */
+@media (max-width: 768px) {
+  mat-sidenav {
+    width: 0; /* Cacher la sidebar sur mobile */
+    transition: width 0.3s ease-in-out; /* Animation lors de l'ouverture/fermeture */
+  }
+
+  mat-sidenav.opened {
+    width: 250px; /* Afficher la sidebar sur mobile quand elle est ouverte */
+  }
+
+  mat-sidenav-content {
+    padding: 10px;
+  }
+
+  .main {
+    margin-left: 0; /* Supprimer la marge gauche quand la sidebar est cachée */
+  }
+
+  mat-toolbar {
+    justify-content: space-between;
+    height: 56px; /* Hauteur réduite de la toolbar sur mobile */
+  }
+
+  .box {
+    display: none; /* Masquer les éléments qui ne sont pas nécessaires sur mobile */
+  }
+
+  .search-bar {
+    margin-left: 0;
+    width: 100%; /* Permet à la barre de recherche de prendre tout l'espace */
+  }
+
+  /* Afficher un bouton de menu dans la barre d'outils pour les petits écrans */
+  mat-icon {
+    display: block;
+  }
+}
+
+/* Pour les très petits écrans (ex: téléphones très petits) */
+@media (max-width: 480px) {
+  mat-toolbar {
+    height: 50px; /* Réduire la hauteur de la toolbar */
+  }
+
+  .main {
+    padding: 10px;
+  }
+
+  mat-sidenav {
+    width: 0;
+  }
+
+  mat-sidenav.opened {
+    width: 250px;
+  }
+
+  .search-bar {
+    font-size: 14px; /* Ajuster la taille du texte pour les petits écrans */
+  }
+}
