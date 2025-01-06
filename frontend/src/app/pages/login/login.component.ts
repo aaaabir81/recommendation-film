@@ -16,28 +16,24 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onLogin() {
+  onLogin(): void {
     const credentials = { email: this.email, password: this.password };
-    console.log('Données envoyées au backend :', credentials);
 
     this.authService.login(credentials).subscribe({
-        next: (response) => {
-            console.log('Réponse réussie :', response);
-            localStorage.setItem('authToken', response.token);
-            alert('Connexion réussie');
-        },
-        error: (err) => {
-            console.error('Erreur de connexion :', err);
-            if (err.status === 500) {
-                alert('Erreur interne du serveur. Veuillez réessayer.');
-            } else if (err.status === 401) {
-                alert('Identifiants invalides');
-            } else {
-                alert('Une erreur inattendue est survenue.');
-            }
-        },
+      next: (response) => {
+        console.log('Connexion réussie :', response);
+
+        // Enregistrer le token et les informations utilisateur
+        localStorage.setItem('authToken', response.token);
+        localStorage.setItem('user', JSON.stringify(response.user));
+
+        // Rediriger vers "movies-list" (page principale après connexion)
+        this.router.navigate(['/movies-list']);
+      },
+      error: (err) => {
+        console.error('Erreur de connexion :', err);
+        alert('Identifiants invalides. Veuillez réessayer.');
+      },
     });
-}
-
-
+  }
 }

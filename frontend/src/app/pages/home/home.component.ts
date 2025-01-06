@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GetGenresService } from '../../services/get-genres.service';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
@@ -20,4 +20,5 @@ export class HomeComponent {
   onSearchBarClick() {
     this.router.navigate(['/search']);
   }
+  
 }

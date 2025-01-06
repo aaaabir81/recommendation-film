@@ -10,7 +10,6 @@ use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\MessageController;
 
 Route::post('register', [UserController::class, 'register']);
-Route::post('login', [UserController::class, 'login']);
 Route::get('user', [UserController::class, 'getUser'])->middleware('auth:sanctum');
 
 Route::get('wishlist', [WishlistController::class, 'index'])->middleware('auth:sanctum');
@@ -45,4 +44,4 @@ Route::get('movie/{id}/images', [MovieController::class, 'getBackdropsImages']);
 Route::get('person/{id}', [MovieController::class, 'getPersonDetail']);
 Route::get('movie/{id}/videos', [MovieController::class, 'getMovieTrailers']);
 
-
+Route::post('/login', [UserController::class, 'login']);

@@ -15,9 +15,10 @@ export const routes: Routes = [
     component: DashboardComponent,
     children: [
       { path: 'login', component: LoginComponent }, // Ajout de la route pour le login
-
+      { path: 'home', redirectTo: 'movies-list', pathMatch: 'full' }, // Ajoute la redirection
       { path: '', redirectTo: 'movies-list', pathMatch: 'full' }, // Ajoute la redirection
       { path: 'movies-list', component: MoviesListComponent },
+      
       {path: 'discussion', component: DiscussionComponent},
   { path: 'detail/:id', component: DetailComponent },
 
