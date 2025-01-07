@@ -13,7 +13,8 @@ class Favorite extends Model
         'user_id', 'tmdb_movie_id', 'type', 'added_at',
     ];
 
-    // Relations
+    public $timestamps = false; // Désactive les colonnes created_at et updated_at
+
     public function user()
     {
         return $this->belongsTo(User::class);

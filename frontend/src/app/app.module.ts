@@ -8,6 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
+import { MatIconModule } from '@angular/material/icon';
+
+
+
 
 @NgModule({
   declarations: [
@@ -18,6 +22,7 @@ import { LoginComponent } from './pages/login/login.component';
   ],
   imports: [
     BrowserModule,
+    MatIconModule, 
     FormsModule, // Nécessaire pour [(ngModel)]
   ],
   providers: [],

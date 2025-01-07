@@ -18,7 +18,7 @@ Route::delete('wishlist/{id}', [WishlistController::class, 'destroy'])->middlewa
 
 Route::get('favorites', [FavoriteController::class, 'index'])->middleware('auth:sanctum');
 Route::post('favorites', [FavoriteController::class, 'store'])->middleware('auth:sanctum');
-Route::delete('favorites/{id}', [FavoriteController::class, 'destroy'])->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->delete('/favorites/{id}', [FavoriteController::class, 'destroy']);
 
 Route::get('discussions', [DiscussionController::class, 'index'])->middleware('auth:sanctum');
 Route::post('discussions', [DiscussionController::class, 'store'])->middleware('auth:sanctum');
@@ -45,3 +45,4 @@ Route::get('person/{id}', [MovieController::class, 'getPersonDetail']);
 Route::get('movie/{id}/videos', [MovieController::class, 'getMovieTrailers']);
 
 Route::post('/login', [UserController::class, 'login']);
+Route::middleware('auth:sanctum')->post('/logout', [UserController::class, 'logout']);

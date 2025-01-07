@@ -35,6 +35,21 @@
     background-color: transparent;
 }
 
+.favorite-icon {
+    font-size: 36px;
+    color: gray; /* Couleur par défaut */
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.favorite-icon:hover {
+    transform: scale(1.2);
+}
+
+.favorite-active {
+    color: red; /* Couleur si ajouté aux favoris */
+}
+
 .posterImg {
     position: absolute;
     width: 9%;

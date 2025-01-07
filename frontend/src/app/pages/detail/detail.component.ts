@@ -7,6 +7,8 @@ import { TimeFormatPipe } from '../../pipes/time-format.pipe';
 import { AboutMoviesComponent } from '../../components/about-movies/about-movies.component';
 import { ReviewsComponent } from '../../components/reviews/reviews.component';
 import { CastComponent } from '../../components/cast/cast.component';
+import { HomeDataService } from '../../services/home-data.service';
+
 
 @Component({
   selector: 'detail',
@@ -21,6 +23,7 @@ import { CastComponent } from '../../components/cast/cast.component';
 })
 export class DetailComponent implements OnInit {
   movieId: string | null = null;
+  isFavorite: boolean = false;
   movieDetails: any | null = null;
   tabMenus: any[] = [
     { id: 'aboutMovies', label: 'About Movies' },
@@ -33,6 +36,7 @@ export class DetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private homeDataService: HomeDataService,
     private getMovieDetailsService: GetMovieDetailsService
   ) {}
 
@@ -113,5 +117,37 @@ export class DetailComponent implements OnInit {
     alert('Your vote has been confirmed');
     this.showRateSection = false;
     document.body.style.overflow = 'auto';
+  
+  
+}
+
+
+toggleFavorite(): void {
+  if (!this.isFavorite) {
+    // Ajouter aux favoris
+    const data = { tmdb_movie_id: this.movieDetails.id, type: 'movie' };
+    this.homeDataService.addFavorite(data).subscribe({
+      next: (response) => {
+        console.log('Ajouté aux Favoris :', response);
+        this.isFavorite = true; // Marquer comme favori
+      },
+      error: (err) => {
+        console.error('Erreur lors de l\'ajout aux Favoris :', err);
+      },
+    });
+  } else {
+    // Supprimer des favoris
+    const movieId = this.movieDetails.id;
+    this.homeDataService.removeFavorite(movieId).subscribe({
+      next: (response) => {
+        console.log('Retiré des Favoris :', response);
+        this.isFavorite = false; // Retirer des favoris
+      },
+      error: (err) => {
+        console.error('Erreur lors de la suppression des Favoris :', err);
+      },
+    });
   }
+}
+
 }

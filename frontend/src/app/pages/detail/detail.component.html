@@ -1,3 +1,5 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <div *ngIf="movieDetails">
     <div class="backdrop">
         <div class="vote">
@@ -44,7 +46,23 @@
             <img style="margin-left: -20px;" src="../../assets/icons/category.svg" alt="">
             <p style="margin-left: 0px;">{{ movieDetails.genres[0].name }}</p>
         </div>
-    </div>
+ 
+ 
+   </div>
+
+
+
+   <div>
+    <h1>{{ movieDetails.title }}</h1>
+    <span 
+        class="material-icons favorite-icon"
+        [ngClass]="{ 'favorite-active': isFavorite }"
+        (click)="toggleFavorite()">
+        favorite
+    </span>
+</div>
+
+
 
     <!-- Tab menu -->
     <div class="tabDiv">

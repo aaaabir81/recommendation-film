@@ -85,5 +85,12 @@ class UserController extends Controller
             'token' => $token,
         ]);
     }
+    public function logout(Request $request)
+    {
+        // Supprime le token de l'utilisateur connecté
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json(['message' => 'Déconnexion réussie'], 200);
+    }
 
 }

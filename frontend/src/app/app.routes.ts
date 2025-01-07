@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailComponent } from './pages/detail/detail.component';
 import { DiscussionComponent } from './pages/discussion/discussion.component';
 import { LoginComponent } from './pages/login/login.component';
+import { HomeUComponent } from './pages/home_u/home_u.component'; // Importez le composant HomeU
 
 
 
@@ -16,6 +17,8 @@ export const routes: Routes = [
     children: [
       { path: 'login', component: LoginComponent }, // Ajout de la route pour le login
       { path: 'home', redirectTo: 'movies-list', pathMatch: 'full' }, // Ajoute la redirection
+      { path: 'home_u', component: HomeUComponent }, // Route vers home_u
+
       { path: '', redirectTo: 'movies-list', pathMatch: 'full' }, // Ajoute la redirection
       { path: 'movies-list', component: MoviesListComponent },
       

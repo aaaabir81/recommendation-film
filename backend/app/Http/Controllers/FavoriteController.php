@@ -15,23 +15,30 @@ class FavoriteController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'tmdb_movie_id' => 'required|integer',
-            'type' => 'required|string',
+            'tmdb_movie_id' => 'required|integer', // ID du film est requis et doit être un entier
+            'type' => 'required|string|in:movie,series', // Le type doit être "movie" ou "series"
         ]);
-
-        $favorite = Favorite::create($request->all());
-        return response()->json($favorite, 201);
+    
+        $favorite = Favorite::create([
+            'user_id' => auth()->id(),
+            'tmdb_movie_id' => $request->tmdb_movie_id,
+            'type' => $request->type,
+            'added_at' => now(),
+        ]);
+    
+        return response()->json(['message' => 'Favori ajouté avec succès', 'favorite' => $favorite], 201);
     }
 
     public function destroy($id)
-    {
-        $favorite = Favorite::find($id);
-        if (!$favorite) {
-            return response()->json(['message' => 'Favorite item not found'], 404);
-        }
+{
+    $favorite = Favorite::where('tmdb_movie_id', $id)->where('user_id', auth()->id())->first();
 
-        $favorite->delete();
-        return response()->json(['message' => 'Favorite item deleted']);
+    if (!$favorite) {
+        return response()->json(['message' => 'Favori non trouvé'], 404);
     }
+
+    $favorite->delete();
+    return response()->json(['message' => 'Favori supprimé avec succès'], 200);
+}
+
 }

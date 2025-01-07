@@ -14,12 +14,16 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, credentials);
   }
 
-  logout(): void {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
-  }
-
+  
   isAuthenticated(): boolean {
     return !!localStorage.getItem('authToken');
+  }
+  logout(): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    return this.http.post(`${this.apiUrl}/logout`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 }
