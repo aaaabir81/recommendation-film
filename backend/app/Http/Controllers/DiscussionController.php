@@ -4,24 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Discussion;
 use Illuminate\Http\Request;
+use App\Models\Message;
 
 class DiscussionController extends Controller
 {
-    public function index($userId)
-    {
-        return response()->json(Discussion::where('user_id', $userId)->get());
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'started_at' => 'required|date',
-        ]);
-
-        $discussion = Discussion::create($request->all());
-        return response()->json($discussion, 201);
-    }
+    public function getMessages($discussionId) { return response()->json(Message::where('disc_id', $discussionId)->get()); }
+    public function index($userId) { return response()->json(Discussion::where('user_id', $userId)->get()); }
+    public function store(Request $request) { $discussion = new Discussion(); $discussion->user_id = $request->user_id; $discussion->started_at = now(); $discussion->save(); return response()->json($discussion); }
 
     public function show($id)
     {

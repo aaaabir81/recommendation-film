@@ -9,11 +9,10 @@ class Message extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'disc_id', 'sender', 'message', 'sent_at',
-    ];
+    protected $fillable = ['disc_id', 'sender', 'message', 'sent_at'];
 
-    // Relations
+    public $timestamps = false; // Active les timestamps
+
     public function discussion()
     {
         return $this->belongsTo(Discussion::class, 'disc_id');

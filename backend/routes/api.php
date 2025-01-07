@@ -9,8 +9,12 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\MessageController;
 
+Route::get('/discussions/messages/{discussionId}', [DiscussionController::class, 'getMessages']);
+
 Route::post('register', [UserController::class, 'register']);
-Route::get('user', [UserController::class, 'getUser'])->middleware('auth:sanctum');
+// routes/api.php
+Route::get('/user', [UserController::class, 'getUser'])->middleware('auth:sanctum');
+Route::get('/discussions/{userId}', [DiscussionController::class, 'index']);
 
 Route::get('wishlist', [WishlistController::class, 'index'])->middleware('auth:sanctum');
 Route::post('wishlist', [WishlistController::class, 'store'])->middleware('auth:sanctum');
@@ -20,10 +24,10 @@ Route::get('favorites', [FavoriteController::class, 'index'])->middleware('auth:
 Route::post('favorites', [FavoriteController::class, 'store'])->middleware('auth:sanctum');
 Route::delete('favorites/{id}', [FavoriteController::class, 'destroy'])->middleware('auth:sanctum');
 
-Route::get('discussions', [DiscussionController::class, 'index'])->middleware('auth:sanctum');
-Route::post('discussions', [DiscussionController::class, 'store'])->middleware('auth:sanctum');
+Route::get('discussions', [DiscussionController::class, 'index']);
+Route::post('discussions', [DiscussionController::class, 'store']);
 
-Route::post('messages', [MessageController::class, 'store'])->middleware('auth:sanctum');
+Route::post('messages', [MessageController::class, 'store']);
 
 Route::post('users', [UserController::class, 'store']);
 

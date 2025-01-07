@@ -4,13 +4,15 @@
     <h2 class="text-lg font-semibold text-white">Historique</h2>
     <ul>
       <li *ngFor="let history of discussionsHistory" class="p-2 bg-white rounded-md shadow-sm mb-2">
-        {{ history }}
+        <button (click)="loadDiscussion(history)" class="w-full text-left">
+          {{ history.started_at }}
+        </button>
       </li>
     </ul>
   </div>
 
   <!-- Section Discussion -->
-  <div class="discussion w-3/4 flex flex-col p-4 rounded-lg shadow-md" style="min-height: 600px;"> <!-- Ajout de min-height -->
+  <div class="discussion w-3/4 flex flex-col p-4 rounded-lg shadow-md" style="min-height: 600px;">
     <h2 class="text-lg font-semibold text-white mb-4">New Prompt</h2>
     <div class="bg-red-950 p-4 rounded-lg shadow-md space-y-4 h-[400px] overflow-y-auto flex-1">
       <ng-container *ngFor="let message of messages">
@@ -21,5 +23,6 @@
       <input type="text" class="flex-1 px-4 py-2 rounded-l-lg border-t border-b border-l focus:outline-none" placeholder="Type your message..." [(ngModel)]="inputValue" (keydown.enter)="handleSend()" />
       <button class="bg-blue-500 text-white px-4 py-2 rounded-r-lg" (click)="handleSend()">Send</button>
     </div>
+    <button class="bg-green-500 text-white px-4 py-2 rounded-lg mt-4" (click)="saveDiscussion()">Enregistrer Discussion</button>
   </div>
 </div>
