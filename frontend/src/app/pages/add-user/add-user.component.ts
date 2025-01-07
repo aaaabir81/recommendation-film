@@ -1,5 +1,5 @@
 
-import { UserService } from '../services/user.service';  // Importer le service UserService
+import { UserService } from '../../services/user.service';  // Importer le service UserService
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
