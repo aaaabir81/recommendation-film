@@ -1,30 +1,31 @@
-<!-- Affiche de Red Notice -->
 <div class="featured-movie">
-    <!-- Affiche initiale -->
-    <div class="featured-image" *ngIf="!showTrailer && redNoticeMovie?.backdrop_path" [style.backgroundImage]="'url(' + getMovieBackdropUrl(redNoticeMovie?.backdrop_path) + ')'">
-      <div class="movie-details">
-        <h1>{{ redNoticeMovie?.title }}</h1>
-        <p>{{ redNoticeMovie?.overview }}</p>
-        <button (click)="showTrailer = true">Watch Trailer</button>
-      </div>
-    </div>
-    
-    <!-- Le trailer remplace l'affiche après 10 secondes -->
-    <div class="trailer" *ngIf="showTrailer">
-      <iframe 
-        [src]="trailerUrl" 
-        frameborder="0" 
-        allow="autoplay; encrypted-media" 
-        allowfullscreen>
-      </iframe>
+  <!-- Affiche initiale -->
+  <div 
+    class="featured-image" 
+    *ngIf="!showTrailer && redNoticeMovie?.backdrop_path" 
+    [style.backgroundImage]="'url(' + getMovieBackdropUrl(redNoticeMovie?.backdrop_path) + ')'"
+  >
+    <div class="movie-details">
+      <h1>{{ redNoticeMovie?.title }}</h1>
+      <p>{{ redNoticeMovie?.overview }}</p>
     </div>
   </div>
   
-  <!-- Slider des films (affiche d'autres films populaires) -->
-  <div class="slider">
-    <div class="slide" *ngFor="let movie of topMovies; let i = index">
-      <span class="imageNumber">{{ i + 1 }}</span>
-      <img (click)="navigateToDetail(movie.id)" [src]="getMoviePosterUrl(movie.poster_path)" alt="{{ movie.title }}">
-    </div>
+  <!-- Le trailer remplace l'affiche après 10 secondes -->
+  <div class="trailer" *ngIf="showTrailer">
+    <iframe 
+      [src]="trailerUrl" 
+      frameborder="0" 
+      allow="autoplay; encrypted-media" 
+      allowfullscreen>
+    </iframe>
   </div>
-  
+</div>
+
+<!-- Slider des films -->
+<div class="slider">
+  <div class="slide" *ngFor="let movie of topMovies; let i = index">
+    <span class="imageNumber">{{ i + 1 }}</span>
+    <img (click)="navigateToDetail(movie.id)" [src]="getMoviePosterUrl(movie.poster_path)" alt="{{ movie.title }}">
+  </div>
+</div>

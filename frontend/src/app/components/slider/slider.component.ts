@@ -16,7 +16,7 @@ export class SliderComponent implements OnInit {
   @Input() topMovies: any[] = [];
   redNoticeMovie: any = null; // Pour stocker les informations de Red Notice
   showTrailer: boolean = false; // Indicateur pour afficher le trailer
-  trailerUrl: any = ''; // URL sécurisée du trailer
+  trailerUrl: any = '';// URL sécurisée du trailer
 
   constructor(
     private router: Router,

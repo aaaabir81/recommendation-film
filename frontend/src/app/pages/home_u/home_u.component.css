@@ -44,6 +44,7 @@ h1 {
   
 
   .logout-button {
+    margin-top: 20px;
     background-color: transparent;
     border: none;
     cursor: pointer;

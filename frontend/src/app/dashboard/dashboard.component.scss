@@ -1,3 +1,20 @@
+.transparent-toolbar {
+  background-color: transparent !important;
+  position: absolute; /* Positionnez la barre au-dessus de l'image */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3; /* Place la barre de navigation au-dessus de l'affiche */
+}
+.logo {
+  background: transparent !important;
+}
+
+.logo-image {
+  background-color: transparent !important;
+}
+
+
 mat-sidenav-container {
   display: flex;
   height: 100vh;
@@ -19,7 +36,7 @@ mat-sidenav-content {
 
 
 mat-toolbar {
-  background-color: #400000; /* Fond plus sombre pour la toolbar */
+  background-color: transparent !important; /* Définit le fond transparent */
   color: white;
   display: flex;
   justify-content: space-between;
@@ -29,14 +46,14 @@ mat-toolbar {
 }
 
 mat-icon {
-  background-color: #400000;
+  background-color: transparent !important; /* Définit le fond transparent */
   margin-left: 15px;
   color: #608299;
   cursor: pointer;
 }
 
 .box {
-  background-color: #400000;
+  background-color: transparent !important; /* Définit le fond transparent */
   display: flex;
   align-items: center;
   gap: 20px;
@@ -51,7 +68,6 @@ mat-icon {
 }
 
 .main {
-  padding: 20px;
   flex-grow: 1; /* Assurez-vous que le contenu occupe tout l'espace restant */
 }
 

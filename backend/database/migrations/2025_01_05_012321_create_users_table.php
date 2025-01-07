@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('genre');
             $table->string('preferred_type')->nullable();
             $table->json('preferences')->nullable();
+            $table->string('profile_picture_url')->nullable(); // Ajout de la colonne URL pour la photo de profil
             $table->timestamps();
-        });
+        });        
         
     }
 

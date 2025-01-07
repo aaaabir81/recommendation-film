@@ -13,7 +13,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
     protected $fillable = [
-        'fname', 'lname', 'email', 'password', 'birth_date', 'genre', 'preferred_type', 'preferences',
+        'fname', 'lname', 'email', 'password', 'birth_date', 'genre', 'preferred_type', 'preferences','profile_picture_url'
     ];
 
     protected $casts = [

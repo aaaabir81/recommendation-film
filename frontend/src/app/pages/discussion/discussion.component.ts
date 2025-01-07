@@ -77,6 +77,7 @@ export class DiscussionComponent implements OnInit {
     this.inputValue = '';
     this.isTyping = true;
     this.processMessageToHelpMate(this.messages);
+
   }
   
   formatDate(date: Date): string {
@@ -132,6 +133,7 @@ export class DiscussionComponent implements OnInit {
         this.messages = [...chatMessages, helpmateMessage];
         this.saveMessage(helpmateMessage); // Enregistrer le message de HelpMate
         this.isTyping = false;
+        
       },
       error: (error) => {
         console.error("Error:", error);

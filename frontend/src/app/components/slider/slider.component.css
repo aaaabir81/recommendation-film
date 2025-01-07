@@ -1,3 +1,46 @@
+
+.featured-movie {
+  position: relative;
+  width: 100%;
+  height: 80vh; /* Ajuster la hauteur en fonction de l'espace voulu */
+  color: white;
+  overflow: hidden;
+}
+
+.featured-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover; /* Assure que l'image de fond couvre tout l'espace */
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: inset 0px -150px 150px rgba(0, 0, 0, 0.7);
+}
+
+.movie-details {
+  z-index: 10;
+}
+
+.movie-details h1 {
+  font-size: 3rem;
+}
+
+.movie-details p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.trailer iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  border: none; /* Supprime la bordure */
+}
+
 /* Assurez-vous que la classe slider ne soit pas affectée par des styles de display: none ou positionnement */
 .slider {
   display: flex;
@@ -41,30 +84,6 @@
   display: none;
 }
 
-.featured-movie {
-  position: relative;
-  width: 100%;
-  height: 80vh; /* Ajuster la hauteur en fonction de l'espace voulu */
-  color: white;
-  overflow: hidden;
-}
-
-.featured-image {
-  width: 100%;
-  height: 100%;
-  background-size: cover; /* Assure que l'image de fond couvre tout l'espace */
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 20px;
-  box-shadow: inset 0px -150px 150px rgba(0, 0, 0, 0.7);
-}
-
-.movie-details {
-  z-index: 10;
-}
-
 .movie-details h1 {
   font-size: 3rem;
 }
@@ -74,12 +93,21 @@
   margin: 10px 0;
 }
 
-.trailer iframe {
-  position: absolute;
+.trailer {
+  position: absolute; /* Position absolue pour occuper tout l'écran */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 20;
-  border: none; /* Supprime la bordure */
+  display: flex; /* Centre le contenu */
+  justify-content: center;
+  align-items: center;
+  background-color: black; /* Optionnel : ajoute un fond noir */
+  z-index: 2; /* Assure que le trailer est au-dessus de tout */
+}
+
+.trailer iframe {
+  width: 100%; /* Prend toute la largeur */
+  height: 100%; /* Prend toute la hauteur */
+  border: none; /* Supprime les bordures */
 }

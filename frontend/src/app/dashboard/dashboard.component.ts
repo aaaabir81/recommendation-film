@@ -31,6 +31,13 @@ export class DashboardComponent {
     public getGenresService: GetGenresService
   ) {}
 
+  isFullScreen: boolean = false;
+
+ngOnInit() {
+  this.isFullScreen = true; // Définir sur true si l'affiche doit prendre tout l'écran
+}
+
+
   goToHome(): void {
     this.router.navigate(['/movies-list']);
   }

@@ -22,20 +22,37 @@ class UserController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'fname' => 'required|string',
-            'lname' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:6',
-            'birth_date' => 'required|date',
-            'genre' => 'required|string',
-            'preferred_type' => 'required|string',
-        ]);
+{
+    $request->validate([
+        'fname' => 'required|string',
+        'lname' => 'required|string',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|string|min:6',
+        'birth_date' => 'required|date',
+        'genre' => 'required|string',
+        'preferred_type' => 'required|string',
+        'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
 
-        $user = User::create($request->all());
-        return response()->json($user, 201);
+    // Vérifier si un fichier est téléchargé
+    $profilePictureUrl = null;
+    if ($request->hasFile('profile_picture')) {
+        $file = $request->file('profile_picture');
+        
+        // Stocker le fichier dans le dossier public/profile_pictures
+        $path = $file->store('profile_pictures', 'public');  // Utilise 'public' pour stocker dans storage/app/public
+        $profilePictureUrl = asset('storage/' . $path); // Générer l'URL accessible publiquement
     }
+
+    // Créer un utilisateur avec les données du formulaire et l'URL de la photo de profil
+    $userData = $request->all();
+    $userData['profile_picture_url'] = $profilePictureUrl;  // Ajouter l'URL de l'image
+
+    $user = User::create($userData);
+
+    return response()->json($user, 201);
+}
+
 
     public function update(Request $request, $id)
     {

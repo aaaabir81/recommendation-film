@@ -2,11 +2,16 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MovieService } from '../../access-layer/movie.service';
 import { SearchMovieService } from '../../services/search-movie.service';
-
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
+import { NoResultComponent } from '../../components/no-result/no-result.component';
+import { TimeFormatPipe } from '../../pipes/time-format.pipe';
 @Component({
   selector: 'search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
+  imports: [FormsModule, CommonModule,SearchBarComponent,NoResultComponent,TimeFormatPipe]
 })
 export class SearchComponent {
   searchWord: string = '';
