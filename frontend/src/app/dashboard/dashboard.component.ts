@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { SearchBarComponent } from '../components/search-bar/search-bar.component';
 import { Router, RouterLink } from '@angular/router';
 import { GetGenresService } from '../services/get-genres.service';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,8 @@ import { GetGenresService } from '../services/get-genres.service';
     MatToolbarModule,
     RouterModule,
     AppNavComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    FooterComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
