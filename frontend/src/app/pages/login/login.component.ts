@@ -28,7 +28,7 @@ export class LoginComponent {
         localStorage.setItem('user', JSON.stringify(response.user));
 
         // Rediriger vers "movies-list" (page principale après connexion)
-        this.router.navigate(['/movies-list']);
+        this.router.navigate(['/home_u']);
       },
       error: (err) => {
         console.error('Erreur de connexion :', err);

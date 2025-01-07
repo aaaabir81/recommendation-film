@@ -13,14 +13,13 @@ class Discussion extends Model
         'user_id', 'started_at',
     ];
 
+    public $timestamps = false; // Active les timestamps
+
     // Relations
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function messages()
-    {
-        return $this->hasMany(Message::class);
-    }
+    public function messages() { return $this->hasMany(Message::class, 'disc_id'); }
 }

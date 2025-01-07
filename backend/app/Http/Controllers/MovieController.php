@@ -158,4 +158,12 @@ class MovieController extends Controller
             return response()->json(['error' => 'Failed to fetch data'], 500);
         }
     }
+
+
+
+
+
+
+
+    
 }

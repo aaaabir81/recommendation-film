@@ -1,0 +1,31 @@
+<div class="min-h-screen bg-gray-900 text-white p-6">
+    <h1 class="text-3xl text-center text-red-500 mb-6">Mes Favoris</h1>
+  
+    <div *ngIf="loading" class="text-center">
+      <p>Chargement des favoris...</p>
+    </div>
+  
+    <div *ngIf="!loading && favorites.length === 0" class="text-center">
+      <p>Aucun favori trouvé.</p>
+    </div>
+  
+    <div *ngIf="!loading && favorites.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let movie of favorites" class="bg-gray-800 p-4 rounded-lg shadow-lg">
+            <img
+              [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+              alt="{{ movie.title }}"
+              class="w-full h-auto rounded-lg mb-4"
+            />
+            <h2 class="text-xl text-red-500">{{ movie.title }}</h2>
+            <button
+              (click)="removeFromFavorites(movie.tmdb_movie_id)"
+              class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+            >
+              Retirer
+            </button>
+          </div>
+          
+          
+          
+  </div>
+  

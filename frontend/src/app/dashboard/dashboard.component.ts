@@ -38,4 +38,8 @@ export class DashboardComponent {
   onSearchBarClick() {
     this.router.navigate(['/search']);
   }
+
+  goToLogin(): void {
+    this.router.navigate(['/login']);
+  }
 }
