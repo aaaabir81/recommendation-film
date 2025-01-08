@@ -51,4 +51,11 @@ ngOnInit() {
   goToLogin(): void {
     this.router.navigate(['/login']);
   }
+
+  goToFav(): void {
+    this.router.navigate(['/favorites']);
+  }
+  goTowish(): void {
+    this.router.navigate(['/wishlist']);
+  }
 }
