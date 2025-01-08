@@ -9,6 +9,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeUComponent } from './pages/home_u/home_u.component'; // Importez le composant HomeU
 import { FavoritesComponent } from './pages/favorites/favorites.component'; // Importez le composant HomeU
 import { SearchComponent } from './pages/search/search.component';
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
 
 
 
@@ -26,6 +27,7 @@ export const routes: Routes = [
       { path: 'create', component: AddUserComponent },
       { path: 'favorites', component:  FavoritesComponent},
       { path: 'search', component:  SearchComponent},
+      { path: 'wishlist', component:  WishlistComponent},
       
       
       {path: 'discussion', component: DiscussionComponent},

@@ -46,6 +46,23 @@
     transform: scale(1.2);
 }
 
+
+.material-icons {
+    font-size: 36px;
+    color: gray; /* Couleur par défaut */
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.material-icons:hover {
+    transform: scale(1.2);
+}
+
+
+.favorite-active {
+    color: green; /* Couleur si ajouté aux favoris */
+}
+ 
 .favorite-active {
     color: red; /* Couleur si ajouté aux favoris */
 }

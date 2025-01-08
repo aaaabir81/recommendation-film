@@ -16,9 +16,11 @@ Route::post('register', [UserController::class, 'register']);
 Route::get('/user', [UserController::class, 'getUser'])->middleware('auth:sanctum');
 Route::get('/discussions/{userId}', [DiscussionController::class, 'index']);
 
-Route::get('wishlist', [WishlistController::class, 'index'])->middleware('auth:sanctum');
-Route::post('wishlist', [WishlistController::class, 'store'])->middleware('auth:sanctum');
-Route::delete('wishlist/{id}', [WishlistController::class, 'destroy'])->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/wishlist', [WishlistController::class, 'getUserWishlist']);
+    Route::post('/wishlist', [WishlistController::class, 'store']);
+    Route::delete('/wishlist/{tmdbMovieId}', [WishlistController::class, 'destroy']);
+});
 
 Route::get('favorites', [FavoriteController::class, 'index'])->middleware('auth:sanctum');
 Route::post('favorites', [FavoriteController::class, 'store'])->middleware('auth:sanctum');

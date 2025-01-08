@@ -8,6 +8,8 @@ import { AboutMoviesComponent } from '../../components/about-movies/about-movies
 import { ReviewsComponent } from '../../components/reviews/reviews.component';
 import { CastComponent } from '../../components/cast/cast.component';
 import { HomeDataService } from '../../services/home-data.service';
+import { WishlistService } from '../../services/wishlist.service';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -18,13 +20,15 @@ import { HomeDataService } from '../../services/home-data.service';
     TimeFormatPipe,
     AboutMoviesComponent,
     ReviewsComponent,
-    CastComponent
+    CastComponent,FormsModule
   ]
 })
 export class DetailComponent implements OnInit {
   movieId: string | null = null;
   isFavorite: boolean = false;
   movieDetails: any | null = null;
+
+  watchTime: string = ''; // Variable pour stocker la date choisie par l'utilisateur
   tabMenus: any[] = [
     { id: 'aboutMovies', label: 'About Movies' },
     { id: 'reviews', label: 'Reviews' },
@@ -37,7 +41,8 @@ export class DetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private homeDataService: HomeDataService,
-    private getMovieDetailsService: GetMovieDetailsService
+    private getMovieDetailsService: GetMovieDetailsService,
+    private wishlistService: WishlistService,
   ) {}
 
   ngOnInit(): void {
@@ -149,5 +154,23 @@ toggleFavorite(): void {
     });
   }
 }
+
+addToWishlist(): void {
+  const data = {
+    tmdb_movie_id: this.movieDetails.id,
+    type: 'movie',
+    watch_time: this.watchTime, // Ajouter la date choisie par l'utilisateur
+  };
+
+  this.wishlistService.addToWishlist(data).subscribe({
+    next: (response) => {
+      console.log('Ajouté à la wishlist avec succès :', response);
+    },
+    error: (err) => {
+      console.error('Erreur lors de l\'ajout à la wishlist :', err);
+    },
+  });
+}
+
 
 }

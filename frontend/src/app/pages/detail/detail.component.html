@@ -1,5 +1,3 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
 <div *ngIf="movieDetails">
     <div class="backdrop">
         <div class="vote">
@@ -13,6 +11,7 @@
     <div class="titleDiv">
         <h2 class="movieTitle">{{ movieDetails.title }}</h2>
     </div>
+
     <!-- General info for desktop -->
     <div class="generalInfo">
         <div class="date">
@@ -31,6 +30,7 @@
             <p style="margin-left: 0px;">{{ movieDetails.genres[0].name }}</p>
         </div>
     </div>
+
     <!-- General info for mobile -->
     <div class="generalInfoMobile">
         <div class="dateMobile">
@@ -40,28 +40,44 @@
         </div>
         <div class="hourMobile">
             <img src="../../assets/icons/hour.svg" alt="">
-            <p>{{ movieDetails.runtime | timeFormat }}
+            <p>{{ movieDetails.runtime | timeFormat }}</p>
         </div>
         <div class="categoryMobile">
             <img style="margin-left: -20px;" src="../../assets/icons/category.svg" alt="">
             <p style="margin-left: 0px;">{{ movieDetails.genres[0].name }}</p>
         </div>
- 
- 
-   </div>
+    </div>
 
+    <div>
+        <span 
+            class="material-icons favorite-icon"
+            [ngClass]="{ 'favorite-active': isFavorite }"
+            (click)="toggleFavorite()">
+            favorite
+        </span>
+    </div>
 
+    <!-- Sélection de la date -->
+    <div class="mt-4">
+        <label for="watchTime" class="text-gray-300">Choisissez une date pour voir ce film :</label>
+        <input
+          type="date"
+          id="watchTime"
+          [(ngModel)]="watchTime"
+          name="watchTime"
+          class="bg-gray-800 text-white p-2 rounded-lg w-full"
+        />
+    </div>
 
-   <div>
-    <h1>{{ movieDetails.title }}</h1>
-    <span 
-        class="material-icons favorite-icon"
-        [ngClass]="{ 'favorite-active': isFavorite }"
-        (click)="toggleFavorite()">
-        favorite
-    </span>
-</div>
-
+    <!-- Icône pour Ajouter à la Wishlist -->
+     <br>
+<span 
+class="material-icons cursor-pointer" 
+(click)="addToWishlist()"
+title="Ajouter à la Wishlist"
+>
+playlist_add
+</span>
 
 
     <!-- Tab menu -->
