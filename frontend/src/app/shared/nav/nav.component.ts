@@ -51,11 +51,11 @@ export class AppNavComponent implements OnInit {
   }
 
   navigateToCreate() {
-    this.router.navigate(['/create']);
+    this.router.navigate(['/auth']);
   }
 
   navigateToLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth']);
   }
   calculateAge(birthDate: string | undefined): number {
     if (!birthDate) return 0;
@@ -74,7 +74,7 @@ export class AppNavComponent implements OnInit {
     localStorage.removeItem('user');
     this.isUserLoggedIn = false;
     this.user = null;
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth']);
   }
 
   navigateToDiscussion(): void {

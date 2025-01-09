@@ -1,71 +1,132 @@
-<div id="container" class="container">
-    <!-- Partie Connexion -->
-    <div class="form-container sign-in">
-      <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="space-y-6">
-        <h1 class="text-red-500">Connexion</h1>
-        <div class="social-icons">
-          <a href="#"><i class="material-icons">facebook</i></a>
-          <a href="#"><i class="material-icons">google</i></a>
-          <a href="#"><i class="material-icons">twitter</i></a>
-        </div>
-        <input type="email" placeholder="Email" [(ngModel)]="loginEmail" name="email" required />
-        <input type="password" placeholder="Mot de passe" [(ngModel)]="loginPassword" name="password" required />
-        <button type="submit">Sign In</button>
-      </form>
-    </div>
+<div class="container" id="container">
+  <!-- Formulaire d'inscription -->
+  <div class="form-container sign-up" style="background-color: white;">
+    <form (ngSubmit)="onSubmit()">
+      <h1 style="background-color: white;">Create Account</h1>
   
-    <!-- Partie Inscription -->
-    <div class="form-container sign-up">
-      <form (ngSubmit)="onRegister()" #registerForm="ngForm" class="space-y-6">
-        <h1 class="text-red-500">Inscription</h1>
-        <div class="social-icons">
-          <a href="#"><i class="material-icons">facebook</i></a>
-          <a href="#"><i class="material-icons">google</i></a>
-          <a href="#"><i class="material-icons">twitter</i></a>
-        </div>
-        <input type="text" placeholder="First Name" [(ngModel)]="fname" name="fname" required />
-        <input type="text" placeholder="Last Name" [(ngModel)]="lname" name="lname" required />
-        <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
-        <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
-        <input type="date" placeholder="Date of Birth" [(ngModel)]="birth_date" name="birth_date" required />
-        <div>
-          <label>
-            <input type="radio" [(ngModel)]="genre" value="Male" name="gender" required />
-            Male
-          </label>
-          <label>
-            <input type="radio" [(ngModel)]="genre" value="Female" name="gender" required />
-            Female
-          </label>
-        </div>
-        <div>
-          <label>
-            <input type="radio" [(ngModel)]="preferred_type" value="Movie" name="type" required />
-            Movie
-          </label>
-          <label>
-            <input type="radio" [(ngModel)]="preferred_type" value="Series" name="type" required />
-            Series
-          </label>
-        </div>
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
-  
-    <!-- Toggle -->
-    <div class="toggle-container">
-      <div class="toggle">
-        <div class="toggle-panel toggle-left">
-          <h1>Welcome Back!</h1>
-          <p>To keep connected with us, please login with your personal info</p>
-          <button id="login" (click)="toggleForm(false)">Sign In</button>
-        </div>
-        <div class="toggle-panel toggle-right">
-          <h1>Hello, Friend!</h1>
-          <p>Enter your personal details and start your journey with us</p>
-          <button id="register" (click)="toggleForm(true)">Sign Up</button>
+      <!-- Nouveau champ ajouté -->
+      <div style="background-color: white;">
+        <label style="background-color: white;" for="fname" class="text-gray-400">First Name</label>
+        <input type="text" [(ngModel)]="fname" name="fname" placeholder="First Name" required
+          class="w-full px-3 py-2 bg-gray-700 text-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-200" />
+      </div>
+      <div style="background-color: white;">
+        <label style="background-color: white;" for="lname" class="text-gray-400">Last Name</label>
+        <input type="text" [(ngModel)]="lname" name="lname" placeholder="Last Name" required
+          class="w-full px-3 py-2 bg-gray-700 text-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-200" />
+      </div>
+      <div style="background-color: white;">
+        <label style="background-color: white;" for="email" class="text-gray-400">Email</label>
+        <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required
+          class="w-full px-3 py-2 bg-gray-700 text-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-200" />
+      </div>
+      <div style="background-color: white;">
+        <label style="background-color: white;" for="password" class="text-gray-400">Password</label>
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required
+          class="w-full px-3 py-2 bg-gray-700 text-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-200" />
+      </div>
+      <div style="background-color: white;">
+        <label style="background-color: white;" for="profile_picture" class="text-gray-400">Profile Picture</label>
+        <input style="background-color: white;"
+          type="file"
+          id="profile_picture"
+          (change)="onFileSelected($event)"
+          class="w-full px-3 py-2 bg-gray-700 text-gray-400 rounded-lg"
+          accept="image/png, image/jpeg, image/jpg, image/gif, image/svg+xml"
+        />
+        <!-- Aperçu de l'image sélectionnée -->
+        <div *ngIf="profilePicturePreview" style="background-color: white;">
+          <img style="background-color: white;" [src]="profilePicturePreview" alt="Profile Picture Preview" class="mt-2 w-32 h-32 rounded-full object-cover">
         </div>
       </div>
-    </div>
+  
+      <!-- Date de naissance -->
+      <div style="background-color: white;">
+        <label  style="background-color: white;" for="birth_date" class="text-gray-400">Date of Birth</label>
+        <input type="date" [(ngModel)]="birth_date" name="birth_date" required
+          class="w-full px-3 py-2 bg-gray-700 text-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-200" />
+      </div>
+  
+      <!-- Genre -->
+      <div style="background-color: white;">
+        <label style="background-color: white;" class="text-gray-400">Gender</label>
+        <div style="background-color: white;"  class="flex space-x-4 mt-2" style="background-color: white;">
+          <label style="background-color: white;" class="flex items-center space-x-2 cursor-pointer">
+            <input style="background-color: white;" type="radio" [(ngModel)]="genre" name="genre" value="Male" required
+              class="hidden peer" />
+            <div 
+              class="px-4 py-2 bg-gray-700 text-gray-400 rounded-lg peer-checked:bg-blue-600 peer-checked:text-white transition duration-200">
+              Male 👨
+            </div>
+          </label>
+          <label class="flex items-center space-x-2 cursor-pointer" style="background-color: white;">
+            <input style="background-color: white;" type="radio" [(ngModel)]="genre" name="genre" value="Female" required
+              class="hidden peer" />
+            <div 
+              class="px-4 py-2 bg-gray-700 text-gray-400 rounded-lg peer-checked:bg-pink-600 peer-checked:text-white transition duration-200">
+              Female 👩
+            </div>
+          </label>
+        </div>
+      </div>
+  
+      <!-- Type préféré -->
+      <div style="background-color: white;">
+        <label style="background-color: white;" class="text-gray-400">Preferred Type</label>
+        <div class="flex space-x-4 mt-2" style="background-color: white;">
+          <label class="flex items-center space-x-2 cursor-pointer" style="background-color: white;">
+            <input type="radio" [(ngModel)]="preferred_type" name="preferred_type" value="Series" required
+              class="hidden peer" />
+            <div
+              class="px-4 py-2 bg-gray-700 text-gray-400 rounded-lg peer-checked:bg-green-600 peer-checked:text-white transition duration-200">
+              Series 📺
+            </div>
+          </label>
+          <label class="flex items-center space-x-2 cursor-pointer" style="background-color: white;">
+            <input type="radio" [(ngModel)]="preferred_type" name="preferred_type" value="Movie" required
+              class="hidden peer" />
+            <div
+              class="px-4 py-2 bg-gray-700 text-gray-400 rounded-lg peer-checked:bg-purple-600 peer-checked:text-white transition duration-200">
+              Movie 🎬
+            </div>
+          </label>
+        </div>
+      </div>
+  
+      <button type="submit"
+        class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition duration-200">
+        Sign Up
+      </button>
+      <p style="background-color: white;">Already have an account? <a href="#" (click)="toggleLogin()" style="background-color: white;">Sign In</a></p>
+    </form>
   </div>
   
+  
+  <!-- Formulaire de connexion -->
+  <div class="form-container sign-in">
+    <form (ngSubmit)="onLogin()">
+        <h1 style="background-color: white;">Sign In</h1>
+        <input type="email" [(ngModel)]="loginEmail" name="loginEmail" placeholder="Email" required>
+        <input type="password" [(ngModel)]="loginPassword" name="loginPassword" placeholder="Password" required>
+        <a style="background-color: white;" href="#">Forget Your Password?</a>
+        <button type="submit">Sign In</button>
+        <p style="background-color: white;">Don't have an account? <a style="background-color: white;" href="#" (click)="toggleSignup()">Sign Up</a></p>
+    </form>
+</div>
+
+  <!-- Boutons de transition entre les formulaires -->
+  <div class="toggle-container">
+      <div class="toggle">
+          <div class="toggle-panel toggle-left">
+              <h1 style="background: #400000;">Welcome Back!</h1>
+              <p style="background: #400000;">Enter your personal details to use all of site features</p>
+              <button  id="login" (click)="toggleLogin()">Sign In</button>
+          </div>
+          <div class="toggle-panel toggle-right">
+              <h1 style="background: #400000;">Hello, Friend!</h1>
+              <p style="background: #400000;">Register with your personal details to use all of site features</p>
+              <button id="register" (click)="toggleSignup()">Sign Up</button>
+          </div>
+      </div>
+  </div>
+</div>

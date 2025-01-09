@@ -10,6 +10,7 @@ import { HomeUComponent } from './pages/home_u/home_u.component'; // Importez le
 import { FavoritesComponent } from './pages/favorites/favorites.component'; // Importez le composant HomeU
 import { SearchComponent } from './pages/search/search.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
+import { AuthComponent } from './pages/auth/auth.component'; // Importez le composant Auth
 
 export const routes: Routes = [
   {
@@ -26,6 +27,7 @@ export const routes: Routes = [
       { path: 'discussion', component: DiscussionComponent },
       { path: 'detail/:id', component: DetailComponent },
       { path: 'home_u', component: HomeUComponent }, // Route pour la page "home_u"
+      { path: 'auth', component: AuthComponent }
     ]
   },
 
