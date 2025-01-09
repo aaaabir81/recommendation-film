@@ -22,11 +22,12 @@ mat-icon{
 
 }
 .user{
+  
   text-align: center;
   font-weight: 800;
   margin-bottom: 50px;
   .img{
-    margin: 15px;
+    margin-left: 50px;
     width: 150px;
     height: 150px;
     display: flex;
@@ -64,5 +65,73 @@ mat-icon{
   }
   .menu-button:focus {
     background: black;
+  }
+}
+
+/* Styles pour les utilisateurs connectés */
+.user.logged-in {
+  background-color: #4a0000;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Styles pour les invités */
+.user.guest {
+  color: #aaaaaa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Image pour les utilisateurs invités */
+.user.guest .img {
+  margin-left: 25px;
+  opacity: 0.8;
+}
+
+/* Menu actif */
+.menu-button.active {
+  background-color: #660000;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Animation au survol */
+.menu-button:hover {
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+}
+
+/* Menu désactivé pour les invités */
+.menu-button.disabled {
+  color: #555;
+  pointer-events: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    width: 100%;
+  }
+  .menu-head {
+    margin-left: 10px;
+  }
+  .menu-button span {
+    margin-left: 5px;
+  }
+}
+button {
+  &.logout {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darkred;
+    }
   }
 }

@@ -11,36 +11,29 @@ import { FavoritesComponent } from './pages/favorites/favorites.component'; // I
 import { SearchComponent } from './pages/search/search.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 
-
 export const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
     children: [
-      { path: 'login', component: LoginComponent }, // Ajout de la route pour le login
-      { path: 'home', redirectTo: 'movies-list', pathMatch: 'full' }, // Ajoute la redirection
-      { path: 'home_u', component: HomeUComponent }, // Route vers home_u
-
-      { path: '', redirectTo: 'movies-list', pathMatch: 'full' }, // Ajoute la redirection
+      { path: 'login', component: LoginComponent },
+      { path: 'home', redirectTo: 'movies-list', pathMatch: 'full' },
       { path: 'movies-list', component: MoviesListComponent },
       { path: 'create', component: AddUserComponent },
-      { path: 'favorites', component:  FavoritesComponent},
-      { path: 'search', component:  SearchComponent},
-      { path: 'wishlist', component:  WishlistComponent},
-      
-      
-      {path: 'discussion', component: DiscussionComponent},
+      { path: 'favorites', component: FavoritesComponent },
+      { path: 'search', component: SearchComponent },
+      { path: 'wishlist', component: WishlistComponent },
+      { path: 'discussion', component: DiscussionComponent },
       { path: 'detail/:id', component: DetailComponent },
-
-
-
-      { path: 'home_u', component: HomeUComponent }, // Redirection après connexion
-
-
+      { path: 'home_u', component: HomeUComponent }, // Route pour la page "home_u"
     ]
-  }
-];
+  },
 
+  // Ajout d'une redirection pour la racine vers 'movies-list'
+  { path: '', redirectTo: '/movies-list', pathMatch: 'full' },
+
+  // Ajouter d'autres routes si nécessaire
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

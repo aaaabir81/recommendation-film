@@ -58,7 +58,7 @@ selectedMovieId: number | null = null;
         this.loadingRecommendations = false;
       },
       error: (err) => {
-        console.error('Erreur lors du chargement des recommandations :', err);
+        console.error('Erreur lors du chargement des Recommendations :', err);
         this.loadingRecommendations = false;
       },
     });
