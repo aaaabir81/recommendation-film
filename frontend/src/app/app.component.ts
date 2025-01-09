@@ -10,9 +10,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AppNavComponent } from './shared/nav/nav.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 @Component({
   selector: 'app-root',

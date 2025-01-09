@@ -1,8 +1,8 @@
 <div class="movie-sections">
 
-    <!-- Recommandations -->
+    <!-- Recommendations -->
     <section class="movie-section"><br><br>
-      <h2 class="section-title">Recommandations</h2>
+      <h2 class="section-title">Recommendations</h2>
       <div class="movie-grid">
         <div class="movie-card" *ngFor="let movie of recommendations">
           <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">

@@ -3,67 +3,67 @@
     <h1 class="text-2xl text-red-500 text-center mb-6">Create an Account</h1>
     <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="space-y-6">
       <div>
-        <label for="fname" class="text-gray-200">First Name</label>
+        <label for="fname" class="text-gray-400">First Name</label>
         <input
           type="text"
           id="fname"
           [(ngModel)]="fname"
           name="fname"
           required
-          class="w-full px-3 py-2 bg-gray-700 text-gray-200 rounded-lg"
+          class="w-full px-3 py-2 bg-gray-700 text-gray-400 rounded-lg"
         />
       </div>
       <div>
-        <label for="lname" class="text-gray-200">Last Name</label>
+        <label for="lname" class="text-gray-400">Last Name</label>
         <input
           type="text"
           id="lname"
           [(ngModel)]="lname"
           name="lname"
           required
-          class="w-full px-3 py-2 bg-gray-700 text-gray-200 rounded-lg"
+          class="w-full px-3 py-2 bg-gray-700 text-gray-400 rounded-lg"
         />
       </div>
       <div>
-        <label for="email" class="text-gray-200">Email</label>
+        <label for="email" class="text-gray-400">Email</label>
         <input
           type="email"
           id="email"
           [(ngModel)]="email"
           name="email"
           required
-          class="w-full px-3 py-2 bg-gray-700 text-gray-200 rounded-lg"
+          class="w-full px-3 py-2 bg-gray-700 text-gray-400 rounded-lg"
         />
       </div>
       <div>
-        <label for="password" class="text-gray-200">Password</label>
+        <label for="password" class="text-gray-400">Password</label>
         <input
           type="password"
           id="password"
           [(ngModel)]="password"
           name="password"
           required
-          class="w-full px-3 py-2 bg-gray-700 text-gray-200 rounded-lg"
+          class="w-full px-3 py-2 bg-gray-700 text-gray-400 rounded-lg"
         />
       </div>
       <div>
-        <label for="birth_date" class="text-gray-200">Date of Birth</label>
+        <label for="birth_date" class="text-gray-400">Date of Birth</label>
         <input
           type="date"
           id="birth_date"
           [(ngModel)]="birth_date"
           name="birth_date"
           required
-          class="w-full px-3 py-2 bg-gray-700 text-gray-200 rounded-lg"
+          class="w-full px-3 py-2 bg-gray-700 text-gray-400 rounded-lg"
         />
       </div>
       <div>
-        <label for="profile_picture" class="text-gray-200">Profile Picture</label>
+        <label for="profile_picture" class="text-gray-400">Profile Picture</label>
         <input
           type="file"
           id="profile_picture"
           (change)="onFileSelected($event)"
-          class="w-full px-3 py-2 bg-gray-700 text-gray-200 rounded-lg"
+          class="w-full px-3 py-2 bg-gray-700 text-gray-400 rounded-lg"
           accept="image/png, image/jpeg, image/jpg, image/gif, image/svg+xml"
         />
         <!-- Aperçu de l'image sélectionnée -->
@@ -75,7 +75,7 @@
       
       <!-- Gender -->
       <div>
-        <label class="text-gray-200">Gender</label>
+        <label class="text-gray-400">Gender</label>
         <div class="flex space-x-4 mt-2">
           <label class="flex items-center space-x-2 cursor-pointer">
             <input
@@ -87,7 +87,7 @@
               class="hidden peer"
             />
             <div
-              class="px-4 py-2 bg-gray-700 text-gray-200 rounded-lg peer-checked:bg-blue-600 peer-checked:text-white transition"
+              class="px-4 py-2 bg-gray-700 text-gray-400 rounded-lg peer-checked:bg-blue-600 peer-checked:text-white transition"
             >
               Male 👨
             </div>
@@ -102,7 +102,7 @@
               class="hidden peer"
             />
             <div
-              class="px-4 py-2 bg-gray-700 text-gray-200 rounded-lg peer-checked:bg-pink-600 peer-checked:text-white transition"
+              class="px-4 py-2 bg-gray-700 text-gray-400 rounded-lg peer-checked:bg-pink-600 peer-checked:text-white transition"
             >
               Female 👩
             </div>
@@ -111,7 +111,7 @@
       </div>
       <!-- Preferred Type -->
       <div>
-        <label class="text-gray-200">Preferred Type</label>
+        <label class="text-gray-400">Preferred Type</label>
         <div class="flex space-x-4 mt-2">
           <label class="flex items-center space-x-2 cursor-pointer">
             <input
@@ -123,7 +123,7 @@
               class="hidden peer"
             />
             <div
-              class="px-4 py-2 bg-gray-700 text-gray-200 rounded-lg peer-checked:bg-green-600 peer-checked:text-white transition"
+              class="px-4 py-2 bg-gray-700 text-gray-400 rounded-lg peer-checked:bg-green-600 peer-checked:text-white transition"
             >
               Series 📺
             </div>
@@ -138,7 +138,7 @@
               class="hidden peer"
             />
             <div
-              class="px-4 py-2 bg-gray-700 text-gray-200 rounded-lg peer-checked:bg-purple-600 peer-checked:text-white transition"
+              class="px-4 py-2 bg-gray-700 text-gray-400 rounded-lg peer-checked:bg-purple-600 peer-checked:text-white transition"
             >
               Movie 🎬
             </div>

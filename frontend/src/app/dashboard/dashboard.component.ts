@@ -38,6 +38,10 @@ ngOnInit() {
   this.isFullScreen = true; // Définir sur true si l'affiche doit prendre tout l'écran
 }
 
+navigateToDiscussion(): void {
+  this.router.navigate(['/discussion']);
+}
+
 
   goToHome(): void {
     this.router.navigate(['/movies-list']);
@@ -48,7 +52,7 @@ ngOnInit() {
   }
 
   goToLogin(): void {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth']);
   }
 
   goToFav(): void {

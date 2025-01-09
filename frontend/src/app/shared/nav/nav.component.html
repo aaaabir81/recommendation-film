@@ -1,39 +1,73 @@
 <div class="navbar h-[100%]">
-  <div class="top">
-    <mat-icon (click)="navigateToDiscussion()">message</mat-icon>
-  </div>
-  <div class="user">
-    <img class="img" src="https://img.icons8.com/clouds/512/admin-settings-male.png"/>
-    <h4 class="name">admin</h4>
-    <p class="mail">adminmial.com</p>
+  
 
+  <!-- Affichage de l'utilisateur connecté -->
+  <div class="user" *ngIf="isUserLoggedIn; else guestTemplate">
+    <br><br><br>
+    <img class="img" [src]="user?.profile_picture_url || 'https://img.icons8.com/clouds/512/user.png'" />
+    <h4 class="name">{{ user?.fname }} {{ user?.lname }}</h4>
+    <br />
+    <p class="mail">Âge : {{ calculateAge(user?.birth_date) }}</p>
+    <br />
+    <button mat-button (click)="logout()" style="color: red;">
+      Logout
+    </button>
   </div>
+
+  <!-- Affichage par défaut si non connecté -->
+  <ng-template #guestTemplate>
+    <div class="user guest">
+      <br><br><br>
+      <img class="img" src="https://img.icons8.com/clouds/512/user.png" />
+      <h4 class="name">Guest</h4>
+      <br>
+      <p class="mail">Not logged in</p>
+      <br>
+      <button mat-button (click)="navigateToLogin()">Login</button>
+    </div>
+  </ng-template>
+
+  <!-- Menu -->
   <div class="menu">
     <div class="menu-head">
       <span>Dashboard</span>
-      <div class="menu-item">
-        <button mat-button class="menu-button" >
-            <mat-icon class="mat-18">dashboard</mat-icon>
-            <span>Home</span>
+    </div>
+    <div class="menu-item">
+      <!-- Menu si l'utilisateur est connecté -->
+      <button mat-button class="menu-button" *ngIf="isUserLoggedIn; else guestMenu" (click)="navigateToHome_U()">
+        <mat-icon class="mat-18">dashboard</mat-icon>
+        <span>Home</span>
+      </button>
+      <br>
+      <button mat-button class="menu-button" *ngIf="isUserLoggedIn" (click)="navigateToFavorites()">
+        <mat-icon>favorite</mat-icon>
+        <span>Favorites</span>
+      </button>
+      <br>
+      <button mat-button class="menu-button" *ngIf="isUserLoggedIn" (click)="navigateToWishlist()">
+        <mat-icon>list</mat-icon>
+        <span>Whishlist</span>
+      </button>
+      <button mat-button class="menu-button" *ngIf="isUserLoggedIn" (click)="navigateToDiscussion()">
+        <mat-icon>chat</mat-icon>
+        <span>Discuss with IA</span>
+      </button>
+      <button mat-button class="menu-button" *ngIf="isUserLoggedIn" (click)="navigateToProfile()">
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </button>
+
+      <!-- Menu par défaut si non connecté -->
+      <ng-template #guestMenu>
+        <button mat-button class="menu-button" (click)="navigateToHome()">
+          <mat-icon>dashboard</mat-icon>
+          <span>Home</span>
         </button>
-        <button mat-button class="menu-button" >
-          <mat-icon> chat</mat-icon>
-          <span>Posts</span>
+        <button mat-button class="menu-button"  (click)="navigateToCreate()">
+          <mat-icon>person_add</mat-icon>
+          <span>Create Account</span>
         </button>
-        <button mat-button class="menu-button">
-          <mat-icon class="mat-18">comment</mat-icon>
-            <span>comments</span>
-        </button>
-        <button mat-button class="menu-button">
-          <mat-icon class="mat-18">pages</mat-icon>
-            <span>Pages</span>
-        </button>
-        <button mat-button class="menu-button">
-          <mat-icon class="mat-18">settings</mat-icon>
-          <span>Setting</span>
-        </button>
-      </div>
+      </ng-template>
     </div>
   </div>
-
 </div>
