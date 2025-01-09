@@ -110,4 +110,8 @@ class UserController extends Controller
         return response()->json(['message' => 'Déconnexion réussie'], 200);
     }
 
+
+
+
+
 }

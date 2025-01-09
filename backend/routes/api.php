@@ -8,6 +8,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/discussions/messages/{discussionId}', [DiscussionController::class, 'getMessages']);
 
@@ -60,4 +61,16 @@ Route::middleware('auth:sanctum')->delete('/favorites/{tmdbMovieId}', [FavoriteC
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::delete('wishlist/{tmdbMovieId}', [WishlistController::class, 'destroy']);
+});
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/users/{id}', [UserController::class, 'show']);
+    Route::put('/users/{id}', [UserController::class, 'update']);
+});
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'getProfile']);
+    Route::post('/profile', [ProfileController::class, 'updateProfile']);
 });

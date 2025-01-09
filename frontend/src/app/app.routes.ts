@@ -10,6 +10,7 @@ import { HomeUComponent } from './pages/home_u/home_u.component'; // Importez le
 import { FavoritesComponent } from './pages/favorites/favorites.component'; // Importez le composant HomeU
 import { SearchComponent } from './pages/search/search.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 
 export const routes: Routes = [
@@ -35,6 +36,7 @@ export const routes: Routes = [
 
 
       { path: 'home_u', component: HomeUComponent }, // Redirection après connexion
+      { path: 'profile', component: ProfileComponent }, // Redirection après connexion
 
 
     ]

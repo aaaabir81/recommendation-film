@@ -1,0 +1,78 @@
+
+<br><br><div class="profile-container">
+    <div class="profile-picture-section">
+      <img
+        [src]="user.profile_picture_url || 'assets/default-profile.png'"
+        alt="Profile Picture"
+        class="profile-picture"
+      />
+    </div>
+    <div class="profile-info-section">
+      <div class="profile-details">
+        <p class="profile-name">{{ user.fname }} {{ user.lname }}</p>
+        <p class="profile-email">Email : {{ user.email }}</p>
+        <p class="profile-preferred">Type préféré : {{ user.preferred_type }}</p>
+      </div>
+      <button class="btn-edit" (click)="openEditModal()">Modifier le profil</button>
+    </div>
+  </div>
+  <!-- Modal d'édition -->
+  <div class="modal " *ngIf="showEditModal">
+    <div class="modal-content">
+      <h1 class="titre">Modifier le profil</h1>
+  
+      <!-- Formulaire d'édition -->
+      <form (ngSubmit)="updateProfile()">
+        <label for="fname">Prénom :</label>
+        <input 
+          type="text" 
+          id="fname" 
+          [(ngModel)]="user.fname" 
+          name="fname" 
+          required 
+        />
+  
+        <label for="lname">Nom :</label>
+        <input 
+          type="text" 
+          id="lname" 
+          [(ngModel)]="user.lname" 
+          name="lname" 
+          required 
+        />
+  
+        <label for="email">Email :</label>
+        <input 
+          type="email" 
+          id="email" 
+          [(ngModel)]="user.email" 
+          name="email" 
+          required 
+        />
+  
+        <label for="preferred_type">Type préféré :</label>
+        <select 
+          id="preferred_type" 
+          [(ngModel)]="user.preferred_type" 
+          name="preferred_type"
+        >
+          <option value="Movie">Film</option>
+          <option value="Series">Série</option>
+        </select>
+  
+        <label for="profile_picture">Changer la photo de profil :</label>
+        <input 
+          type="file" 
+          id="profile_picture" 
+          (change)="onFileSelected($event)" 
+          accept="image/*" 
+        />
+  
+        <div class="modal-actions">
+          <button type="submit" class="btn-save">Enregistrer</button>
+          <button type="button" class="btn-cancel" (click)="closeEditModal()">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
