@@ -57,3 +57,7 @@ Route::middleware('auth:sanctum')->get('/favorites', [FavoriteController::class,
 Route::middleware('auth:sanctum')->delete('/favorites/{tmdbMovieId}', [FavoriteController::class, 'removeFavorite']);
 
 
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::delete('wishlist/{tmdbMovieId}', [WishlistController::class, 'destroy']);
+});

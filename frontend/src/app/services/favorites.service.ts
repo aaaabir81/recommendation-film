@@ -24,4 +24,12 @@ export class FavoriteService {
       headers: { Authorization: `Bearer ${token}` }
     });
   }
+
+  addFavorite(data: any): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    return this.http.post(`${this.apiUrl}/favorites`, data, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+ 
 }

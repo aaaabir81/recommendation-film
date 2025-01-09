@@ -102,7 +102,6 @@
   display: flex; /* Centre le contenu */
   justify-content: center;
   align-items: center;
-  background-color: black; /* Optionnel : ajoute un fond noir */
   z-index: 2; /* Assure que le trailer est au-dessus de tout */
 }
 

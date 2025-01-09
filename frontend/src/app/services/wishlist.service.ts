@@ -31,4 +31,14 @@ export class WishlistService {
       headers: { Authorization: `Bearer ${token}` }
     });
   }
+ 
+
+  removeWishlistItem(tmdbMovieId: number): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    return this.http.delete(`http://localhost:8000/api/wishlist/${tmdbMovieId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+  
+  
 }

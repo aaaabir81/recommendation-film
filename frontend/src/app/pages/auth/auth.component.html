@@ -1,0 +1,71 @@
+<div id="container" class="container">
+    <!-- Partie Connexion -->
+    <div class="form-container sign-in">
+      <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="space-y-6">
+        <h1 class="text-red-500">Connexion</h1>
+        <div class="social-icons">
+          <a href="#"><i class="material-icons">facebook</i></a>
+          <a href="#"><i class="material-icons">google</i></a>
+          <a href="#"><i class="material-icons">twitter</i></a>
+        </div>
+        <input type="email" placeholder="Email" [(ngModel)]="loginEmail" name="email" required />
+        <input type="password" placeholder="Mot de passe" [(ngModel)]="loginPassword" name="password" required />
+        <button type="submit">Sign In</button>
+      </form>
+    </div>
+  
+    <!-- Partie Inscription -->
+    <div class="form-container sign-up">
+      <form (ngSubmit)="onRegister()" #registerForm="ngForm" class="space-y-6">
+        <h1 class="text-red-500">Inscription</h1>
+        <div class="social-icons">
+          <a href="#"><i class="material-icons">facebook</i></a>
+          <a href="#"><i class="material-icons">google</i></a>
+          <a href="#"><i class="material-icons">twitter</i></a>
+        </div>
+        <input type="text" placeholder="First Name" [(ngModel)]="fname" name="fname" required />
+        <input type="text" placeholder="Last Name" [(ngModel)]="lname" name="lname" required />
+        <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
+        <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+        <input type="date" placeholder="Date of Birth" [(ngModel)]="birth_date" name="birth_date" required />
+        <div>
+          <label>
+            <input type="radio" [(ngModel)]="genre" value="Male" name="gender" required />
+            Male
+          </label>
+          <label>
+            <input type="radio" [(ngModel)]="genre" value="Female" name="gender" required />
+            Female
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="radio" [(ngModel)]="preferred_type" value="Movie" name="type" required />
+            Movie
+          </label>
+          <label>
+            <input type="radio" [(ngModel)]="preferred_type" value="Series" name="type" required />
+            Series
+          </label>
+        </div>
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  
+    <!-- Toggle -->
+    <div class="toggle-container">
+      <div class="toggle">
+        <div class="toggle-panel toggle-left">
+          <h1>Welcome Back!</h1>
+          <p>To keep connected with us, please login with your personal info</p>
+          <button id="login" (click)="toggleForm(false)">Sign In</button>
+        </div>
+        <div class="toggle-panel toggle-right">
+          <h1>Hello, Friend!</h1>
+          <p>Enter your personal details and start your journey with us</p>
+          <button id="register" (click)="toggleForm(true)">Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

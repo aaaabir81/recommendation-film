@@ -12,7 +12,6 @@ import { SearchComponent } from './pages/search/search.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 
 
-
 export const routes: Routes = [
   {
     path: '',
@@ -31,7 +30,12 @@ export const routes: Routes = [
       
       
       {path: 'discussion', component: DiscussionComponent},
-  { path: 'detail/:id', component: DetailComponent },
+      { path: 'detail/:id', component: DetailComponent },
+
+
+
+      { path: 'home_u', component: HomeUComponent }, // Redirection après connexion
+
 
     ]
   }

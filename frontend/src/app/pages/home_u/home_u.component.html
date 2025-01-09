@@ -1,12 +1,73 @@
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<div class="top">
-  
-    <button (click)="logout()" class="logout-button">
-        <mat-icon>logout</mat-icon>
-        Déconnexion
-      </button>
-       
-</div>
+<div class="movie-sections">
 
-<slider></slider>
-<category-tab></category-tab>
+    <!-- Recommandations -->
+    <section class="movie-section"><br><br>
+      <h2 class="section-title">Recommandations</h2>
+      <div class="movie-grid">
+        <div class="movie-card" *ngFor="let movie of recommendations">
+          <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+          <p class="movie-title">{{ movie.title }}</p>
+          <div class="action-icons">
+            <span 
+  class="material-icons favorite-icon" 
+  [ngClass]="{ 'favorite-active': isFavorite(movie) }"
+  (click)="toggleFavorite(movie)">
+  favorite
+</span>
+<span 
+  class="material-icons wishlist-icon" 
+  (click)="openDatePicker(movie.id)">
+  list_alt
+</span>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Favoris -->
+    <section class="movie-section">
+      <h2 class="section-title">Mes Favoris</h2>
+      <div class="movie-grid">
+        <div class="movie-card" *ngFor="let favorite of favorites">
+          <img [src]="'https://image.tmdb.org/t/p/w500' + favorite.poster_path" alt="{{ favorite.title }}">
+          <p class="movie-title">{{ favorite.title }}</p>
+          <button class="remove-btn" (click)="removeFromFavorites(favorite.tmdb_movie_id)">Retirer</button>
+        </div>
+      </div>
+      
+    </section>
+  
+    <!-- Wishlist -->
+    <section class="movie-section">
+      <h2 class="section-title">Ma Wishlist</h2>
+      <div class="movie-grid">
+        <div class="movie-card" *ngFor="let movie of wishlist">
+          <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+          <p class="movie-title">{{ movie.title }}</p>
+          <button class="remove-btn" (click)="removeFromWishlist(movie.tmdb_movie_id)">Retirer</button>
+        </div>
+      </div>
+    </section>
+  
+  </div>
+  
+
+
+  <div class="modal" *ngIf="showDatePicker">
+    <div class="modal-content">
+      <h2 class="modal-title">Choisir une date</h2>
+      <p class="modal-description">Sélectionnez une date pour ajouter ce film à votre wishlist.</p>
+      <input
+        type="date"
+        [(ngModel)]="selectedDate"
+        class="date-picker modern-datepicker"
+      />
+      <div class="modal-actions">
+        <button class="modal-btn-confirm" (click)="confirmDate()">Ajouter</button>
+        <button class="modal-btn-cancel" (click)="closeDatePicker()">Annuler</button>
+      </div>
+    </div>
+  </div>
+  
+  

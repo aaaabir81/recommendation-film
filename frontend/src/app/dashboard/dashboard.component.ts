@@ -20,7 +20,6 @@ import { FooterComponent } from './footer/footer.component';
     MatToolbarModule,
     RouterModule,
     AppNavComponent,
-    SearchBarComponent,
     FooterComponent
   ],
   templateUrl: './dashboard.component.html',

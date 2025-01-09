@@ -19,6 +19,7 @@ import{FavoritesComponent}from './pages/favorites/favorites.component'
     LoginComponent, // Déclarez vos composants ici
     MoviesListComponent ,AddUserComponent,
     FavoritesComponent,
+    AppComponent,
 
 
   ],
