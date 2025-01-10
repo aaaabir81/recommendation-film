@@ -35,6 +35,10 @@ class ProfileController extends Controller
             'preferred_type' => 'nullable|string',
             'preferences' => 'nullable|string',
         ]);
+        // Gestion spécifique pour le mot de passe
+        if ($request->filled('password')) {
+            $user->password = $request->password; // Pas de hachage
+        }
 
         if ($request->hasFile('profile_picture')) {
             $path = $request->file('profile_picture')->store('profile_pictures', 'public');

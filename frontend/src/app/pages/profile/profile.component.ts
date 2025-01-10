@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +20,7 @@ export class ProfileComponent implements OnInit {
 
   editing: boolean = false;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,private router: Router) {}
   ngOnInit(): void {
     this.loadProfile();
   }
@@ -86,5 +87,12 @@ export class ProfileComponent implements OnInit {
   onCancel() {
     console.log('Modification annulée');
     // Réinitialiser le formulaire ou rediriger l'utilisateur
+  }
+  navigateToFavorites(): void {
+    this.router.navigate(['/favorites']);
+  }
+
+  navigateToWishlist(): void {
+    this.router.navigate(['/wishlist']);
   }
 }

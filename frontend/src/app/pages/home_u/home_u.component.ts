@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common'; // Importer CommonModule
 import { CategoryTabComponent } from '../../components/category-tab/category-tab.component';
 import { MovieService } from '../../services/movie.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 
@@ -34,7 +35,7 @@ selectedMovieId: number | null = null;
    
     private favoriteService: FavoriteService,
     private wishlistService: WishlistService,
-    private movieService: MovieService,
+    private movieService: MovieService,private router: Router,
     
   ) {}
 
@@ -229,5 +230,7 @@ removeFromWishlist(tmdbMovieId: number | undefined): void {
   });
 }
 
-  
+navigateToDetail(movieId: number): void {
+  this.router.navigate(['/detail', movieId]);
+}
 }

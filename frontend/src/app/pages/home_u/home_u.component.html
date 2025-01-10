@@ -1,21 +1,21 @@
 <div class="movie-sections">
 
     <!-- Recommendations -->
-    <section class="movie-section"><br><br>
+    <section class="movie-section"  ><br><br>
       <h2 class="section-title">Recommendations</h2>
-      <div class="movie-grid">
-        <div class="movie-card" *ngFor="let movie of recommendations">
-          <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+      <div class="movie-grid"  >
+        <div class="movie-card" *ngFor="let movie of recommendations" >     
+              <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"  (click)="navigateToDetail(movie.id)"alt="{{ movie.title }}">
           <p class="movie-title">{{ movie.title }}</p>
           <div class="action-icons">
             <span 
-  class="material-icons favorite-icon" 
-  [ngClass]="{ 'favorite-active': isFavorite(movie) }"
+  class="material-icons favorite-icon cursor-pointer text-gray-400 hover:text-red-400" 
+  [ngClass]="{ 'text-red-500': isFavorite(movie) }"
   (click)="toggleFavorite(movie)">
   favorite
 </span>
 <span 
-  class="material-icons wishlist-icon" 
+  class="material-icons cursor-pointer wishlist-icon" 
   (click)="openDatePicker(movie.id)">
   list_alt
 </span>

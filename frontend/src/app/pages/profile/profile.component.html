@@ -1,76 +1,178 @@
-
-<br><br><div class="profile-container">
-    <div class="profile-picture-section">
-      <img
-        [src]="user.profile_picture_url || 'assets/default-profile.png'"
-        alt="Profile Picture"
-        class="profile-picture"
-      />
-    </div>
-    <div class="profile-info-section">
-      <div class="profile-details">
-        <p class="profile-name">{{ user.fname }} {{ user.lname }}</p>
-        <p class="profile-email">Email : {{ user.email }}</p>
-        <p class="profile-preferred">Preffered type : {{ user.preferred_type }}</p>
-      </div>
-      <button class="btn-edit" (click)="openEditModal()">Edit profile</button>
-    </div>
+<div class="profile-container flex flex-col md:flex-row items-center p-6 bg-[#1c1c1c] shadow-lg rounded-lg gap-6">
+  <!-- Section de la photo de profil -->
+  <div class="profile-picture-section flex-shrink-0">
+    <img
+      [src]="user.profile_picture_url || 'assets/default-profile.png'"
+      alt="Profile Picture"
+      class="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover border-4 border-red-500"
+    />
   </div>
-  <!-- Modal d'édition -->
-  <div class="modal " *ngIf="showEditModal">
-    <div class="modal-content">  
-      <!-- Formulaire d'édition -->
-      <form (ngSubmit)="updateProfile()" style="background: rgba(34, 33, 33, 0.7);">
-        <label for="fname">First name :</label>
-        <input 
-          type="text" 
-          id="fname" 
-          [(ngModel)]="user.fname" 
-          name="fname" 
-          required 
+
+  <!-- Section des informations utilisateur -->
+  <div class="profile-info-section flex flex-col items-center md:items-start text-center md:text-left space-y-2">
+    <p class="profile-name text-2xl font-bold text-gray-800">{{ user.fname }} {{ user.lname }}</p>
+    <p class="profile-email text-lg text-gray-600">Email : {{ user.email }}</p>
+    <p class="profile-preferred text-lg text-gray-600">Preferred Type : {{ user.preferred_type }}</p>
+  </div>
+
+  <!-- Bouton d'édition -->
+  <div class="edit-button-section">
+    <button
+      class="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition w-full md:w-auto"
+      (click)="openEditModal()"
+    >
+      Edit Profile
+    </button>
+  </div>
+</div>
+
+
+<!-- Section des icônes -->
+<div class="profile-actions flex justify-center space-x-6 mt-8">
+  <button
+    (click)="navigateToFavorites()"
+    class="flex items-center space-x-2 bg-[#1c1c1c] text-gray-800 px-4 py-2 rounded-lg shadow-md hover:bg-gray-300"
+  >
+    <span class="material-icons bg-[#1c1c1c] text-red-500">favorite</span>
+    <span class="text-sm bg-[#1c1c1c] font-medium">Favoris</span>
+  </button>
+  <button
+    (click)="navigateToWishlist()"
+    class="flex items-center space-x-2 bg-[#1c1c1c] text-gray-800 px-4 py-2 rounded-lg shadow-md hover:bg-gray-300"
+  >
+    <span class="material-icons bg-[#1c1c1c] text-blue-500">bookmark</span>
+    <span class="text-sm  bg-[#1c1c1c] font-medium">Wishlist</span>
+  </button>
+</div>
+<br>
+
+<div
+  class="fixed inset-0 bg-[#1c1c1c] bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto"
+  *ngIf="showEditModal"
+>
+  <div
+    class="bg-[#1c1c1c] rounded-lg shadow-lg w-full max-w-md mx-auto p-6 relative"
+  >
+    <h2 class="text-2xl font-semibold text-gray-800 text-center mb-6">
+      Modifier le profil
+    </h2>
+
+
+    
+    <!-- Formulaire d'édition -->
+    <form (ngSubmit)="updateProfile()" class=" bg-[#1c1c1c] space-y-4">
+      <div>
+        <label for="fname" class="block bg-[#1c1c1c] text-sm font-medium text-white">Prénom :</label>
+        <input
+          type="text"
+          id="fname"
+          [(ngModel)]="user.fname"
+          name="fname"
+          class="block w-full p-2 bg-[#1c1c1c] border text-slate-200  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
         />
-  
-        <label for="lname">Last name : </label>
-        <input 
-          type="text" 
-          id="lname" 
-          [(ngModel)]="user.lname" 
-          name="lname" 
-          required 
+      </div>
+
+      <div>
+        <label for="lname" class="block text-sm font-medium bg-[#1c1c1c] text-white">Nom :</label>
+        <input
+          type="text"
+          id="lname"
+          [(ngModel)]="user.lname"
+          name="lname"
+          class="block w-full p-2 border text-slate-200 bg-[#1c1c1c] border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
         />
-  
-        <label for="email">Email :</label>
-        <input 
-          type="email" 
-          id="email" 
-          [(ngModel)]="user.email" 
-          name="email" 
-          required 
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm bg-[#1c1c1c] font-medium text-white">Email :</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="user.email"
+          name="email"
+          class="block w-full p-2 border bg-[#1c1c1c] text-slate-200 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
         />
-  
-        <label for="preferred_type">Preffered type :</label>
-        <select 
-          id="preferred_type" 
-          [(ngModel)]="user.preferred_type" 
+      </div>
+
+      <div>
+        <label for="password" class="block text-sm  bg-[#1c1c1c] font-medium text-white">Mot de passe :</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="user.password"
+          name="password"
+          class="block w-full p-2 border text-slate-200 bg-[#1c1c1c] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
+
+      <div>
+        <label for="birth_date" class="block text-sm bg-[#1c1c1c] font-medium text-white">Date de naissance :</label>
+        <input
+          type="date"
+          id="birth_date"
+          [(ngModel)]="user.birth_date"
+          name="birth_date"
+          class="block w-full p-2 border text-slate-200 bg-[#1c1c1c] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
+
+      <div>
+        <label for="genre" class="block text-sm bg-[#1c1c1c] font-medium text-white">Genre :</label>
+        <select
+          id="genre"
+          [(ngModel)]="user.genre"
+          name="genre"
+          class="block w-full p-2 border text-slate-200 bg-[#1c1c1c] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+        >
+          <option value="Male">Homme</option>
+          <option value="Female">Femme</option>
+          <option value="Other">Autre</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="preferred_type" class="block text-sm  bg-[#1c1c1c] font-medium text-white">Type préféré :</label>
+        <select
+          id="preferred_type"
+          [(ngModel)]="user.preferred_type"
           name="preferred_type"
+          class="block w-full p-2 border text-slate-200 bg-[#1c1c1c] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
           <option value="Movie">Film</option>
-          <option value="Series">Series</option>
+          <option value="Series">Série</option>
         </select>
-  
-        <label for="profile_picture">Update profile picture :</label>
-        <input 
-          type="file" 
-          id="profile_picture" 
-          (change)="onFileSelected($event)" 
-          accept="image/*" 
-        />
-  
-        <div class="modal-actions">
-          <button type="submit" class="btn-save">Submit</button>
-          <button type="button" class="btn-cancel" (click)="closeEditModal()">Cancel</button>
-        </div>
-      </form>
-    </div>
+      </div>
+
+      <label for="profile_picture" class="block font-medium text-gray-700">Changer la photo de profil :</label>
+      <input 
+        type="file" 
+        id="profile_picture" 
+        (change)="onFileSelected($event)" 
+        accept="image/*" 
+        class="mb-4"
+      />
+
+      
+
+      <!-- Boutons d'action -->
+      <div class="flex justify-end  bg-[#1c1c1c]  space-x-4">
+        <button
+          type="button"
+          (click)="closeEditModal()"
+          class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
+        >
+          Annuler
+        </button>
+        <button
+          type="submit"
+          class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        >
+          Enregistrer
+        </button>
+      </div>
+    </form>
   </div>
-  
+</div>
