@@ -1,3 +1,4 @@
+<div class="p-10">
 <div *ngIf="movieDetails">
     <div class="backdrop">
         <div class="vote">
@@ -5,7 +6,6 @@
             <p class="voteText">{{ movieDetails.vote_average }}</p>
         </div>
         <img class="backdropImg" [src]="getMovieBackdropUrl(movieDetails.backdrop_path)" alt="{{ movieDetails.title }}">
-        <watchlist [movieDetails]="movieDetails"></watchlist>
     </div>
     <img class="posterImg" [src]="getMoviePosterUrl(movieDetails.poster_path)" alt="{{ movieDetails.title }}">
     <div class="titleDiv">
@@ -48,36 +48,38 @@
         </div>
     </div>
 
-    <div>
-        <span 
-            class="material-icons favorite-icon"
-            [ngClass]="{ 'favorite-active': isFavorite }"
-            (click)="toggleFavorite()">
-            favorite
-        </span>
-    </div>
-
-    <!-- Sélection de la date -->
-    <div class="mt-4">
-        <label for="watchTime" class="text-gray-300">Choisissez une date pour voir ce film :</label>
-        <input
-          type="date"
-          id="watchTime"
-          [(ngModel)]="watchTime"
-          name="watchTime"
-          class="bg-gray-800 text-white p-2 rounded-lg w-full"
-        />
-    </div>
-
-    <!-- Icône pour Ajouter à la Wishlist -->
-     <br>
-<span 
-class="material-icons cursor-pointer" 
-(click)="addToWishlist()"
-title="Ajouter à la Wishlist"
->
-playlist_add
-</span>
+    <!-- Favorite Icon -->
+<div *ngIf="isUserLoggedIn">
+    <span 
+        class="material-icons favorite-icon"
+        [ngClass]="{ 'favorite-active': isFavorite }"
+        (click)="toggleFavorite()">
+        favorite
+    </span>
+  </div>
+  
+  <!-- Date Selection -->
+  <div class="mt-4" *ngIf="isUserLoggedIn">
+    <label for="watchTime" class="text-gray-300">Choisissez une date pour voir ce film :</label>
+    <input
+      type="date"
+      id="watchTime"
+      [(ngModel)]="watchTime"
+      name="watchTime"
+      class="bg-gray-800 text-white p-2 rounded-lg w-full"
+    />
+  </div>
+  
+  <!-- Add to Wishlist Icon -->
+  <br *ngIf="isUserLoggedIn">
+  <span 
+    class="material-icons cursor-pointer" 
+    (click)="addToWishlist()"
+    title="Ajouter à la Wishlist"
+    *ngIf="isUserLoggedIn">
+    playlist_add
+  </span>
+  
 
 
     <!-- Tab menu -->
@@ -120,4 +122,5 @@ playlist_add
     <div class="okRate">
         <button class="okRateButton" (click)="okRate()">OK</button>
     </div>
+</div>
 </div>

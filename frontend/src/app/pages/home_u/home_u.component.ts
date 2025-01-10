@@ -71,7 +71,7 @@ selectedMovieId: number | null = null;
         this.loadingFavorites = false;
       },
       error: (err) => {
-        console.error('Erreur lors du chargement des favoris :', err);
+        console.error('Erreur lors du Loading :', err);
         this.loadingFavorites = false;
       },
     });
@@ -205,7 +205,7 @@ loadWishlist(): void {
       this.loadingWishlist = false;
     },
     error: (err) => {
-      console.error('Erreur lors du chargement de la wishlist :', err);
+      console.error('Erreur lors du Loading :', err);
       this.loadingWishlist = false;
     },
   });

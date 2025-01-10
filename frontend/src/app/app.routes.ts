@@ -11,16 +11,19 @@ import { FavoritesComponent } from './pages/favorites/favorites.component'; // I
 import { SearchComponent } from './pages/search/search.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { AuthComponent } from './pages/auth/auth.component';
 
 
 
 export const routes: Routes = [
+  // Redirection de la racine vers 'movies-list'
+  { path: '', redirectTo: 'movies-list', pathMatch: 'full' },
+  
   {
     path: '',
     component: DashboardComponent,
     children: [
       { path: 'login', component: LoginComponent },
-      { path: 'home', redirectTo: 'movies-list', pathMatch: 'full' },
       { path: 'movies-list', component: MoviesListComponent },
       { path: 'create', component: AddUserComponent },
       { path: 'favorites', component: FavoritesComponent },
@@ -28,24 +31,16 @@ export const routes: Routes = [
       { path: 'wishlist', component: WishlistComponent },
       { path: 'discussion', component: DiscussionComponent },
       { path: 'detail/:id', component: DetailComponent },
-
-
-
-
       { path: 'home_u', component: HomeUComponent }, // Redirection après connexion
       { path: 'profile', component: ProfileComponent }, // Redirection après connexion
-
-
-
-    
+      { path: 'auth', component: AuthComponent }, // Redirection après connexion
     ]
   },
 
-  // Ajout d'une redirection pour la racine vers 'movies-list'
-  { path: '', redirectTo: '/movies-list', pathMatch: 'full' },
-
-  // Ajouter d'autres routes si nécessaire
+  // Gestion des routes non trouvées
+  { path: '**', redirectTo: 'movies-list' }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

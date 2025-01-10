@@ -14,14 +14,11 @@ import { DiscussionModalComponent } from '../../discussion-modal/discussion-moda
   imports: [CommonModule, MessageComponent, FormsModule]
 })
 export class DiscussionComponent implements OnInit {
-  messages = [
-    { message: "Hello, I'm HelpMate! Ask me anything!", sentTime: "just now", sender: "helpmate", direction: "incoming" }
-  ];
+  messages = [{ message: "Hello, I'm CineChill! Ask me anything!", sentTime: "just now", sender: "CineChill", direction: "incoming" }];
   inputValue = '';
   isTyping = false;
-  API_KEY = "votre_api_key";
+  userId = 1;
   discussionsHistory: any[] = [];
-  userId = 1; // Remplacez ceci par la méthode de récupération de l'ID utilisateur appropriée
 
   constructor(private http: HttpClient, private router: Router, public dialog: MatDialog) {}
 
@@ -29,23 +26,24 @@ export class DiscussionComponent implements OnInit {
     this.getDiscussions();
   }
 
+  // Récupère les discussions depuis l'API Laravel
   getDiscussions(): void {
     this.http.get<any[]>(`http://127.0.0.1:8000/api/discussions/${this.userId}`).subscribe(
-        data => {
-            if (data.length === 0) {
-                console.warn('No discussions found for this user.');
-            }
-            this.discussionsHistory = data;
-        },
-        error => {
-            console.error('Error fetching discussions:', error);
+      data => {
+        if (data.length === 0) {
+          console.warn('No discussions found for this user.');
         }
+        this.discussionsHistory = data;
+      },
+      error => {
+        console.error('Error fetching discussions:', error);
+      }
     );
-}
+  }
 
+  // Charge une discussion spécifique et ouvre la modal
   loadDiscussion(history: any): void {
     this.http.get<any[]>(`http://127.0.0.1:8000/api/discussions/messages/${history.id}`).subscribe(messages => {
-      // Ajoutez l'attribut inert au conteneur principal lorsqu'une modale est ouverte
       document.querySelector('app-root')?.setAttribute('inert', 'true');
       
       const dialogRef = this.dialog.open(DiscussionModalComponent, {
@@ -53,7 +51,6 @@ export class DiscussionComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(() => {
-        // Supprimez l'attribut inert lorsque la modale est fermée
         document.querySelector('app-root')?.removeAttribute('inert');
       });
     }, error => {
@@ -61,6 +58,7 @@ export class DiscussionComponent implements OnInit {
     });
   }
 
+  // Envoie un message et le traite avec l'API CineChill
   handleSend(): void {
     if (!this.inputValue.trim()) return;
   
@@ -69,87 +67,75 @@ export class DiscussionComponent implements OnInit {
       direction: "outgoing",
       sender: "user",
       sentTime: new Date().toLocaleTimeString(),
-      sent_at: this.formatDate(new Date()) // Convertir la date au bon format
+      sent_at: this.formatDate(new Date())
     };
-  
+    
     this.messages = [...this.messages, newMessage];
-    this.saveMessage(newMessage); // Enregistrer le message dans la table des messages
+    this.saveMessage(newMessage); // Enregistrer le message dans la base de données
     this.inputValue = '';
     this.isTyping = true;
-    this.processMessageToHelpMate(this.messages);
-
+    this.processMessageToCineChill(this.messages);
   }
   
+  // Formate la date dans un format standard
   formatDate(date: Date): string {
     const yyyy = date.getFullYear();
-    const mm = String(date.getMonth() + 1).padStart(2, '0'); // Mois de 1 à 12
-    const dd = String(date.getDate()).padStart(2, '0'); // Jour de 01 à 31
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
     const hh = String(date.getHours()).padStart(2, '0');
     const min = String(date.getMinutes()).padStart(2, '0');
     const ss = String(date.getSeconds()).padStart(2, '0');
   
     return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
   }
-  
 
-  processMessageToHelpMate(chatMessages: any[]): void {
+  // Traite le message et l'envoie à l'API Laravel (qui le redirige vers OpenAI)
+  processMessageToCineChill(chatMessages: any[]): void {
     const apiMessages = chatMessages.map(msg => ({
-      role: msg.sender === "HelpMate" ? "assistant" : "user",
+      role: msg.sender === "CineChill" ? "assistant" : "user",
       content: msg.message
     }));
-
-    const systemMessage = {
-      role: "system",
-      content: `You are HelpMate, an intelligent virtual assistant designed to assist with daily life tasks.
-      Your capabilities include:
-      - Providing helpful, accurate, and concise answers to user questions.
-      - Offering advice on productivity, organization, and time management.
-      - Assisting with meal planning, recipes, and dietary recommendations.
-      - Supporting learning and education by explaining complex topics in simple terms.
-      - Giving entertainment suggestions like movies, series, and books.
-      - Helping with minor technical troubleshooting and general knowledge queries.
-      Respond in a polite and engaging tone while keeping the answers relevant and to the point.`,
-    };
-
+  
+    const systemMessage = { role: "system", content: `You are CineChill, an expert in movie recommendations. Your capabilities include: - Providing personalized movie suggestions based on user preferences. - Offering detailed information about movies, including genres, cast, and reviews. - Assisting users in finding movies similar to those they have enjoyed. - Recommending movies for various moods and occasions. - Keeping users updated on new releases and trending movies. Respond in a friendly and engaging tone while keeping your answers relevant and to the point.`, };
+  
     const apiRequestBody = {
-      model: "gpt-3.5-turbo",
       messages: [systemMessage, ...apiMessages],
     };
-
-    this.http.post<any>('https://api.openai.com/v1/chat/completions', apiRequestBody, {
-      headers: {
-        Authorization: `Bearer ${this.API_KEY}`,
-        "Content-Type": "application/json",
-      }
-    }).subscribe({
+  
+    // Appel API Laravel pour traiter avec OpenAI
+    this.http.post<any>('http://127.0.0.1:8000/api/CineChill-response', apiRequestBody).subscribe({
       next: (data) => {
-        const helpmateMessage = {
-          message: data.choices[0]?.message?.content || "No response from HelpMate.",
-          sender: "helpmate",
+        console.log("Réponse reçue :", data);  // Ajouter des logs pour vérifier la réponse
+  
+        const CineChillMessageContent = data.choices?.[0]?.message?.content || "No response from CineChill.";
+        const CineChillMessage = {
+          message: CineChillMessageContent,
+          sender: "CineChill",
           direction: "incoming",
-          sent_at: this.formatDate(new Date()) // Ajouter la date formatée
+          sent_at: this.formatDate(new Date())
         };
-
-        this.messages = [...chatMessages, helpmateMessage];
-        this.saveMessage(helpmateMessage); // Enregistrer le message de HelpMate
+  
+        this.messages = [...chatMessages, CineChillMessage];
+        this.saveMessage(CineChillMessage);
         this.isTyping = false;
-        
       },
       error: (error) => {
         console.error("Error:", error);
         const errorMessage = {
           message: "An error occurred. Please try again later.",
-          sender: "helpmate",
+          sender: "CineChill",
           direction: "incoming",
-          sent_at: this.formatDate(new Date()) // Ajouter la date formatée pour l'erreur
+          sent_at: this.formatDate(new Date())
         };
         this.messages = [...chatMessages, errorMessage];
-        this.saveMessage(errorMessage); // Enregistrer le message d'erreur
+        this.saveMessage(errorMessage);
         this.isTyping = false;
       }
     });
   }
+  
 
+  // Sauvegarde du message dans la base de données
   saveMessage(message: any): void {
     const disc_id = this.discussionsHistory[this.discussionsHistory.length - 1]?.id || 0;
     if (!disc_id || disc_id === 0) {
@@ -172,11 +158,9 @@ export class DiscussionComponent implements OnInit {
             console.error('Error saving message:', error);
         }
     );
-}
+  }
 
-  
-  
-
+  // Crée une nouvelle discussion
   saveDiscussion(): void {
     const newDiscussion = {
       user_id: this.userId,
@@ -190,6 +174,7 @@ export class DiscussionComponent implements OnInit {
     });
   }
 
+  // Ajoute une discussion à l'historique
   addToHistory(discussion: string): void {
     this.discussionsHistory.push(discussion);
   }

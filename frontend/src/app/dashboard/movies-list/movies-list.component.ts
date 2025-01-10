@@ -31,20 +31,27 @@ import { SearchBarComponent } from '../../components/search-bar/search-bar.compo
     MatDialogModule,
     SliderComponent,
     CategoryTabComponent,
-
   ],
   templateUrl: './movies-list.component.html',
   styleUrls: ['./movies-list.component.css'],
 })
-export class MoviesListComponent{
+export class MoviesListComponent implements OnInit {
+  isUserLoggedIn: boolean = false;
+  user: any = null;
+
   constructor(
     private router: Router,
     public getGenresService: GetGenresService
   ) {}
 
+  ngOnInit(): void {
+    this.isUserLoggedIn = !!localStorage.getItem('authToken');
+    if (this.isUserLoggedIn) {
+      this.router.navigate(['/home_u']);
+    }
+  }
+
   onSearchBarClick() {
     this.router.navigate(['/search']);
   }
-
-  
 }

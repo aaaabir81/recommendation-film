@@ -9,6 +9,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OpenAIController;
 
 Route::get('/discussions/messages/{discussionId}', [DiscussionController::class, 'getMessages']);
 
@@ -74,3 +75,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ProfileController::class, 'getProfile']);
     Route::post('/profile', [ProfileController::class, 'updateProfile']);
 });
+
+Route::post('openai/chat', [OpenAIController::class, 'chat']);
+Route::post('CineChill-response', [OpenAIController::class, 'getCineChillResponse']);
+

@@ -5,7 +5,10 @@
     <ul>
       <li *ngFor="let history of discussionsHistory" class="p-2 bg-white rounded-md shadow-sm mb-2">
         <button (click)="loadDiscussion(history)" class="w-full text-left">
-          {{ history.started_at }}
+          <div class="bg-white">
+            <span class="text-sm text-gray-500 bg-white">Discussion du  : </span>
+            <span class="text-sm font-semibold bg-white">{{ history.started_at }}</span>
+          </div>
         </button>
       </li>
     </ul>
@@ -20,7 +23,7 @@
       </ng-container>
     </div>
     <div class="flex mt-4">
-      <input type="text" class="flex-1 px-4 py-2 rounded-l-lg border-t border-b border-l focus:outline-none" placeholder="Type your message..." [(ngModel)]="inputValue" (keydown.enter)="handleSend()" />
+      <input type="text" class="text-white flex-1 px-4 py-2 rounded-l-lg border-t border-b border-l focus:outline-none" placeholder="Type your message..." [(ngModel)]="inputValue" (keydown.enter)="handleSend()" />
       <button class="bg-blue-500 text-white px-4 py-2 rounded-r-lg" (click)="handleSend()">Send</button>
     </div>
     <button class="bg-green-500 text-white px-4 py-2 rounded-lg mt-4" (click)="saveDiscussion()">Enregistrer Discussion</button>

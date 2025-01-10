@@ -11,24 +11,18 @@ import { HomeDataService } from '../../services/home-data.service';
 import { WishlistService } from '../../services/wishlist.service';
 import { FormsModule } from '@angular/forms';
 
-
 @Component({
   selector: 'detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css'],
-  imports:[CommonModule,WatchlistComponent,
-    TimeFormatPipe,
-    AboutMoviesComponent,
-    ReviewsComponent,
-    CastComponent,FormsModule
-  ]
+  imports:[CommonModule, WatchlistComponent, TimeFormatPipe, AboutMoviesComponent, ReviewsComponent, CastComponent, FormsModule]
 })
 export class DetailComponent implements OnInit {
   movieId: string | null = null;
   isFavorite: boolean = false;
   movieDetails: any | null = null;
-
-  watchTime: string = ''; // Variable pour stocker la date choisie par l'utilisateur
+  isUserLoggedIn: boolean = false; // New property to track login status
+  watchTime: string = ''; // Variable for storing the selected date
   tabMenus: any[] = [
     { id: 'aboutMovies', label: 'About Movies' },
     { id: 'reviews', label: 'Reviews' },
@@ -46,7 +40,10 @@ export class DetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // get id from url with activated route
+    // Check if the user is logged in
+    this.isUserLoggedIn = !!localStorage.getItem('authToken');
+
+    // Get ID from URL with activated route
     this.route.paramMap.subscribe((params) => {
       this.movieId = params.get('id');
       console.log('ID: ', this.movieId);
@@ -62,7 +59,6 @@ export class DetailComponent implements OnInit {
     });
   }
 
-  // get movie backdrop image
   getMovieBackdropUrl(backdropPath: string | null): string {
     if (backdropPath) {
       return `https://image.tmdb.org/t/p/w500${backdropPath}`;
@@ -71,7 +67,6 @@ export class DetailComponent implements OnInit {
     }
   }
 
-  // get movie poster image
   getMoviePosterUrl(posterPath: string | null): string {
     if (posterPath) {
       return `https://image.tmdb.org/t/p/w500${posterPath}`;
@@ -100,7 +95,6 @@ export class DetailComponent implements OnInit {
 
   showRateSection: boolean = false;
 
-  // RATE
   onRatePage(): any {
     this.showRateSection = true;
     document.body.style.overflow = 'hidden';
@@ -122,55 +116,48 @@ export class DetailComponent implements OnInit {
     alert('Your vote has been confirmed');
     this.showRateSection = false;
     document.body.style.overflow = 'auto';
-  
-  
-}
+  }
 
+  toggleFavorite(): void {
+    if (!this.isFavorite) {
+      const data = { tmdb_movie_id: this.movieDetails.id, type: 'movie' };
+      this.homeDataService.addFavorite(data).subscribe({
+        next: (response) => {
+          console.log('Ajouté aux Favoris :', response);
+          this.isFavorite = true;
+        },
+        error: (err) => {
+          console.error('Erreur lors de l\'ajout aux Favoris :', err);
+        },
+      });
+    } else {
+      const movieId = this.movieDetails.id;
+      this.homeDataService.removeFavorite(movieId).subscribe({
+        next: (response) => {
+          console.log('Retiré des Favoris :', response);
+          this.isFavorite = false;
+        },
+        error: (err) => {
+          console.error('Erreur lors de la suppression des Favoris :', err);
+        },
+      });
+    }
+  }
 
-toggleFavorite(): void {
-  if (!this.isFavorite) {
-    // Ajouter aux favoris
-    const data = { tmdb_movie_id: this.movieDetails.id, type: 'movie' };
-    this.homeDataService.addFavorite(data).subscribe({
+  addToWishlist(): void {
+    const data = {
+      tmdb_movie_id: this.movieDetails.id,
+      type: 'movie',
+      watch_time: this.watchTime,
+    };
+
+    this.wishlistService.addToWishlist(data).subscribe({
       next: (response) => {
-        console.log('Ajouté aux Favoris :', response);
-        this.isFavorite = true; // Marquer comme favori
+        console.log('Ajouté à la wishlist avec succès :', response);
       },
       error: (err) => {
-        console.error('Erreur lors de l\'ajout aux Favoris :', err);
-      },
-    });
-  } else {
-    // Supprimer des favoris
-    const movieId = this.movieDetails.id;
-    this.homeDataService.removeFavorite(movieId).subscribe({
-      next: (response) => {
-        console.log('Retiré des Favoris :', response);
-        this.isFavorite = false; // Retirer des favoris
-      },
-      error: (err) => {
-        console.error('Erreur lors de la suppression des Favoris :', err);
+        console.error('Erreur lors de l\'ajout à la wishlist :', err);
       },
     });
   }
-}
-
-addToWishlist(): void {
-  const data = {
-    tmdb_movie_id: this.movieDetails.id,
-    type: 'movie',
-    watch_time: this.watchTime, // Ajouter la date choisie par l'utilisateur
-  };
-
-  this.wishlistService.addToWishlist(data).subscribe({
-    next: (response) => {
-      console.log('Ajouté à la wishlist avec succès :', response);
-    },
-    error: (err) => {
-      console.error('Erreur lors de l\'ajout à la wishlist :', err);
-    },
-  });
-}
-
-
 }

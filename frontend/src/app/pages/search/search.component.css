@@ -3,7 +3,9 @@
 }
 
 .searchBar{
-    margin-left: 47%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .searchWord h2 {

@@ -19,6 +19,7 @@
 }
 
 .movie-details {
+  background: transparent;
   z-index: 10;
 }
 
@@ -109,4 +110,28 @@
   width: 100%; /* Prend toute la largeur */
   height: 100%; /* Prend toute la hauteur */
   border: none; /* Supprime les bordures */
+}
+
+/* Adapter pour les écrans plus petits */
+@media (max-width: 768px) {
+
+  .movie-details h1 {
+    font-size: 1.5em; /* Réduire la taille de la police pour les titres */
+  }
+
+  .movie-details p {
+    font-size: 1em; /* Réduire la taille de la police pour les paragraphes */
+  }
+}
+
+/* Pour les très petits écrans (ex: téléphones très petits) */
+@media (max-width: 480px) {
+
+  .movie-details h1 {
+    font-size: 1.2em; /* Réduire encore plus la taille de la police pour les titres */
+  }
+
+  .movie-details p {
+    font-size: 0.9em; /* Réduire encore plus la taille de la police pour les paragraphes */
+  }
 }

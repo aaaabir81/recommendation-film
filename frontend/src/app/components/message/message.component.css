@@ -1,7 +1,7 @@
 
   
   /* Styles pour les messages entrants */
-  .incoming {
+  .CineChill {
     background-color: #f1f1f1; /* Couleur de fond pour les messages entrants */
     border-radius: 15px 15px 15px 0;
     padding: 10px;
@@ -13,7 +13,7 @@
   }
   
   /* Styles pour les messages sortants */
-  .outgoing {
+  .user {
     background-color: #007bff; /* Couleur de fond pour les messages sortants */
     color: white;
     border-radius: 15px 15px 0 15px;
@@ -27,7 +27,7 @@
   }
   
   /* Pour centrer le texte et le mettre en valeur */
-  .incoming p, .outgoing p {
+  .CineChill p, .user p {
     margin: 0;
     font-size: 14px;
   }

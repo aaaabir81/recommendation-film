@@ -28,7 +28,7 @@ export class WishlistComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        this.errorMessage = 'Erreur lors du chargement de la wishlist.';
+        this.errorMessage = 'Erreur lors du Loading.';
         this.loading = false;
         console.error(err);
       },

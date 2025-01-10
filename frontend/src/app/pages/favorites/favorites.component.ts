@@ -28,7 +28,7 @@ export class FavoritesComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        console.error('Erreur lors du chargement des favoris :', err);
+        console.error('Erreur lors du Loading :', err);
         this.errorMessage = 'Impossible de charger les favoris.';
         this.loading = false;
       }

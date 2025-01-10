@@ -5,15 +5,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
-import { SearchBarComponent } from '../components/search-bar/search-bar.component';
-import { Router, RouterLink } from '@angular/router';
-import { GetGenresService } from '../services/get-genres.service';
 import { FooterComponent } from './footer/footer.component';
+import { Router } from '@angular/router';
+import { GetGenresService } from '../services/get-genres.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports:[
+  imports: [
     CommonModule,
     MatIconModule,
     MatSidenavModule,
@@ -27,21 +26,22 @@ import { FooterComponent } from './footer/footer.component';
 })
 export class DashboardComponent {
 
+  isSidebarOpen = false; // Initialement la sidebar est ouverte sur desktop
+  isFullScreen: boolean = false;
+
   constructor(
     private router: Router,
     public getGenresService: GetGenresService
   ) {}
 
-  isFullScreen: boolean = false;
+  ngOnInit() {
+    this.isFullScreen = true; // Définir sur true si l'affiche doit prendre tout l'écran
+  }
 
-ngOnInit() {
-  this.isFullScreen = true; // Définir sur true si l'affiche doit prendre tout l'écran
-}
-
-navigateToDiscussion(): void {
-  this.router.navigate(['/discussion']);
-}
-
+  // Méthodes de navigation
+  navigateToDiscussion(): void {
+    this.router.navigate(['/discussion']);
+  }
 
   goToHome(): void {
     this.router.navigate(['/movies-list']);
@@ -58,7 +58,13 @@ navigateToDiscussion(): void {
   goToFav(): void {
     this.router.navigate(['/favorites']);
   }
+
   goTowish(): void {
     this.router.navigate(['/wishlist']);
+  }
+
+  // Toggle la sidebar pour les petits écrans
+  toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
 }

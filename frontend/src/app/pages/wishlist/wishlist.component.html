@@ -1,19 +1,19 @@
-<div class="min-h-screen bg-gray-900 text-white p-6">
-    <h1 class="text-3xl text-center text-red-500 mb-6">Ma Wishlist</h1>
+<div class="min-h-screen text-white p-20">
+    <h1 class="text-3xl text-center text-red-500 mb-6">My Wishlist</h1>
   
     <div *ngIf="loading" class="text-center">
-      <p>Chargement de la wishlist...</p>
+      <p>Loading...</p>
     </div>
   
     <div *ngIf="!loading && wishlist.length === 0" class="text-center">
-      <p>Aucun élément trouvé dans la wishlist.</p>
+      <p>No element found.</p>
     </div>
   
     <div *ngIf="!loading && wishlist.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div *ngFor="let movie of wishlist" class="bg-gray-800 p-4 rounded-lg shadow-lg">
         <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}" class="w-full rounded-lg">
-        <h2 class="text-xl text-red-500 mt-2">{{ movie.title }}</h2>
-        <p class="text-gray-400">À voir le : {{ movie.watch_time | date }}</p>
+        <h2 class=" bg-gray-800 text-xl text-red-500 mt-2">{{ movie.title }}</h2>
+        <p class=" bg-gray-800 text-gray-400 mb-5">À voir le : {{ movie.watch_time | date }}</p>
         <button (click)="removeFromWishlist(movie.tmdb_movie_id)" class="bg-red-600 text-white px-4 py-2 rounded-lg">
           Retirer
         </button>

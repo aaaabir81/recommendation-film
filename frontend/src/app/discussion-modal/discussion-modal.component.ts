@@ -16,7 +16,7 @@ export class DiscussionModalComponent {
     // Ajouter la direction des messages
     this.data.messages = this.data.messages.map(message => ({
       ...message,
-      direction: message.sender === 'helpmate' ? 'incoming' : 'outgoing'
+      direction: message.sender === 'CineChill' ? 'incoming' : 'outgoing'
     }));
   }
 }

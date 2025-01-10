@@ -67,7 +67,6 @@
 
 .modal-title {
   background: rgba(255, 255, 255, 0.9); /* Fond transparent avec opacité */
-
   font-size: 1.5rem;
   color: #ff6f61;
   margin-bottom: 10px;
@@ -100,7 +99,6 @@
 }
 
 .modal-actions button {
-
   margin: 0 10px;
   padding: 10px 20px;
   cursor: pointer;

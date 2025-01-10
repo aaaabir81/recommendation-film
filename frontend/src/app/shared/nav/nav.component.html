@@ -7,7 +7,7 @@
     <img class="img" [src]="user?.profile_picture_url || 'https://img.icons8.com/clouds/512/user.png'" />
     <h4 class="name">{{ user?.fname }} {{ user?.lname }}</h4>
     <br />
-    <p class="mail">Âge : {{ calculateAge(user?.birth_date) }}</p>
+    <p class="mail">Age : {{ calculateAge(user?.birth_date) }}</p>
     <br />
     <button mat-button (click)="logout()" style="color: red;">
       Logout

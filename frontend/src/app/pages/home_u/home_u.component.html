@@ -27,7 +27,7 @@
   
     <!-- Favoris -->
     <section class="movie-section">
-      <h2 class="section-title">Mes Favoris</h2>
+      <h2 class="section-title">My Favorites</h2>
       <div class="movie-grid">
         <div class="movie-card" *ngFor="let favorite of favorites">
           <img [src]="'https://image.tmdb.org/t/p/w500' + favorite.poster_path" alt="{{ favorite.title }}">
@@ -40,7 +40,7 @@
   
     <!-- Wishlist -->
     <section class="movie-section">
-      <h2 class="section-title">Ma Wishlist</h2>
+      <h2 class="section-title">My Wishlist</h2>
       <div class="movie-grid">
         <div class="movie-card" *ngFor="let movie of wishlist">
           <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
@@ -56,16 +56,15 @@
 
   <div class="modal" *ngIf="showDatePicker">
     <div class="modal-content">
-      <h2 class="modal-title">Choisir une date</h2>
-      <p class="modal-description">Sélectionnez une date pour ajouter ce film à votre wishlist.</p>
+      <h2 class="modal-title">Choose a date</h2>
       <input
         type="date"
         [(ngModel)]="selectedDate"
         class="date-picker modern-datepicker"
       />
       <div class="modal-actions">
-        <button class="modal-btn-confirm" (click)="confirmDate()">Ajouter</button>
-        <button class="modal-btn-cancel" (click)="closeDatePicker()">Annuler</button>
+        <button class="modal-btn-confirm" (click)="confirmDate()">Add</button>
+        <button class="modal-btn-cancel" (click)="closeDatePicker()">Cancel</button>
       </div>
     </div>
   </div>

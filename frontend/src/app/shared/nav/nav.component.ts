@@ -1,47 +1,63 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
-  imports: [FormsModule, HttpClientModule,MatIcon,CommonModule]
+  imports: [FormsModule, HttpClientModule, MatIcon, CommonModule]
 })
 export class AppNavComponent implements OnInit {
   isUserLoggedIn: boolean = false;
   user: any = null;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     // Vérifier si l'utilisateur est connecté
+    this.updateLoginStatus();
+
+    // Écouter les événements de navigation
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.updateLoginStatus();
+      });
+  }
+
+  updateLoginStatus(): void {
     this.isUserLoggedIn = !!localStorage.getItem('authToken');
     if (this.isUserLoggedIn) {
       const userData = localStorage.getItem('user');
       this.user = userData ? JSON.parse(userData) : null;
+    } else {
+      this.user = null;
     }
+    // Déclencher la détection des changements manuellement
+    this.cdr.detectChanges();
   }
-  // Fonction de navigation vers Home
+
   navigateToHome() {
     this.router.navigate(['/movies-list']);
   }
 
-  // Fonction de navigation vers Home
   navigateToHome_U() {
     this.router.navigate(['/home_u']);
   }
 
-
-  // Fonction de navigation vers les favoris
   navigateToFavorites() {
     this.router.navigate(['/favorites']);
   }
 
-  // Fonction de navigation vers la wishlist
   navigateToWishlist() {
     this.router.navigate(['/wishlist']);
   }
@@ -57,6 +73,7 @@ export class AppNavComponent implements OnInit {
   navigateToLogin() {
     this.router.navigate(['/auth']);
   }
+
   calculateAge(birthDate: string | undefined): number {
     if (!birthDate) return 0;
     const birth = new Date(birthDate);

@@ -1,7 +1,8 @@
 <mat-sidenav-container class="container">
-  <mat-sidenav #sidebar mode="side" opened>
+  <mat-sidenav #sidebar mode="side" [opened]="isSidebarOpen">
     <app-nav></app-nav>
   </mat-sidenav>
+  
   <!-- Body -->
   <mat-sidenav-content style="width: 100%; border: none;">
     <div class="content">
@@ -9,23 +10,16 @@
       <div class="toolbar">
         <mat-toolbar [class.transparent-toolbar]="isFullScreen">
           <!-- Menu Icon on the left -->
-          <mat-icon (click)="sidebar.toggle()">menu</mat-icon>
+          <mat-icon class="menu-icon" (click)="toggleSidebar()">menu</mat-icon>
 
           <!-- Logo in the center -->
           <div class="logo" (click)="goToHome()">
             <img src="../../assets/logo_cinechill.png" alt="Logo" class="h-16 logo-image" />
           </div>
-          
 
           <!-- Right side content (Icons) -->
-          <div class="box">
-            <mat-icon (click)="goTowish()" style="cursor: pointer;">bookmark</mat-icon>
-            <mat-icon (click)="goToFav()" style="cursor: pointer;">favorite</mat-icon>
-            <mat-icon (click)="navigateToDiscussion()">message</mat-icon>
-            <mat-icon (click)="goToLogin()" style="cursor: pointer;">login</mat-icon>
-            <mat-icon (click)="onSearchBarClick()">search</mat-icon>
-            
-          </div>
+          
+            <mat-icon class="box" (click)="onSearchBarClick()">search</mat-icon>
         </mat-toolbar>
       </div>
 

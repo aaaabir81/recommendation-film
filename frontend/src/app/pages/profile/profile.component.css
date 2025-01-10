@@ -102,16 +102,17 @@
 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
-  .modal-content label,.titre {
-
+  .modal-content label,.titre{
     background: rgba(34, 33, 33, 0.7);
-color: #fff;
+
+    color: #fff;
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
   }
   .modal-content input,
   .modal-content select {
+    background: rgba(34, 33, 33, 0.7);
 
     width: 100%;
     color: #9f9090;
@@ -127,6 +128,7 @@ color: #fff;
   
   /* Actions du modal */
   .modal-actions {
+    background: rgba(34, 33, 33, 0.7);
     display: flex;
     justify-content: space-between;
   }

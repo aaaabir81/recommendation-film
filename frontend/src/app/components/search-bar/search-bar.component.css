@@ -1,10 +1,10 @@
 .searchBar {   
     margin-right: 2%;
-    width: 100px;
+    width: 250px;
 }
 
 .searchBar input {
-    width: 150px;
+    width: 250px;
     padding: 5px;
     outline: none;
     border: none;

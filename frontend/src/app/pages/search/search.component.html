@@ -1,19 +1,4 @@
-<div class="top">
-    <p>.</p>
-    <p>.</p>
-</div>
-<div class="header">
-    <div class="left">
-        <button class="headerButton" (click)="goToHomePage()"><img src="../../assets/icons/back-button.svg" alt=""></button>
-    </div>
-    <div class="center">
-        <h1>Search</h1>
-    </div>
-    <div class="right">
-        <button class="headerButton" (click)="sendReport()"><img src="../../assets/icons/error.svg" alt=""></button>
-    </div>
-</div>
-
+<div class="p-20">
 <div class="searchBar">
     <search-bar (searchEvent)="onSearchEvent($event)"></search-bar>
 </div>
@@ -50,4 +35,6 @@
 
 <div *ngIf="searchResults.length == 0" >
     <no-result></no-result>
+</div>
+
 </div>
