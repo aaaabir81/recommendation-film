@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';  // Assurez-vous que ce service existe
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -11,9 +11,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css'],
   standalone: true,
-  imports: [FormsModule, HttpClientModule,CommonModule]
+  imports: [FormsModule, HttpClientModule, CommonModule]
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
   fname: string = ''; // Correspond à first_name
   lname: string = ''; // Correspond à last_name
   email: string = '';
@@ -28,11 +28,24 @@ export class AuthComponent {
   name: string = '';
   loginEmail: string = '';
   loginPassword: string = '';
+  user: any;
 
-  constructor(private authService: AuthService, private router: Router,private userService: UserService) {}
+  constructor(private authService: AuthService, private router: Router, private userService: UserService) {}
+
+  ngOnInit(): void {
+    // Retrieve the user information from local storage if available
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+    }
+  }
 
   // Fonction de gestion de la soumission de la connexion
   onLogin(): void {
+    // Réinitialiser les champs de formulaire
+    this.loginEmail = '';
+    this.loginPassword = '';
+
     const credentials = { email: this.loginEmail, password: this.loginPassword };
 
     this.authService.login(credentials).subscribe({
@@ -42,6 +55,9 @@ export class AuthComponent {
         // Enregistrer le token et les informations utilisateur dans localStorage
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
+        this.user = response.user;
+
+        
 
         // Rediriger vers "home_u" (page principale après connexion)
         this.router.navigate(['/home_u']);
@@ -55,24 +71,47 @@ export class AuthComponent {
 
   // Fonction de gestion de la soumission de l'inscription
   onSubmitSignup(): void {
-    const userData = { name: this.name, email: this.email, password: this.password };
+    const userData = {
+      fname: this.fname,
+      lname: this.lname,
+      email: this.email,
+      password: this.password,
+      birth_date: this.birth_date,
+      genre: this.genre,
+      preferred_type: this.preferred_type,
+    };
 
-    this.authService.login(userData).subscribe({
-      next: (response) => {
-        console.log('Inscription réussie :', response);
+
+
+    // Créer un FormData pour envoyer l'image et les données de l'utilisateur
+    const formData = new FormData();
+    Object.keys(userData).forEach(key => {
+      formData.append(key, userData[key as keyof typeof userData] as string);
+    });
+
+    if (this.profilePictureFile) {
+      formData.append('profile_picture', this.profilePictureFile); // Ajouter l'image
+    }
+
+
+    // Envoi des données au backend via le service UserService
+    this.userService.addUser(formData).subscribe(
+      response => {
+        console.log('Inscription réussie:', response);
 
         // Enregistrer le token et les informations utilisateur
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
+        this.user = response.user;
 
-        // Rediriger vers "home_u" (page principale après inscription)
-        this.router.navigate(['/home_u']);
+              
+        window.location.reload();
       },
-      error: (err) => {
-        console.error('Erreur d\'inscription :', err);
+      error => {
+        console.error('Erreur lors de l\'inscription:', error);
         alert('Une erreur est survenue. Veuillez réessayer.');
-      },
-    });
+      }
+    );
   }
 
   // Gestion des transitions entre les formulaires
@@ -86,8 +125,8 @@ export class AuthComponent {
     if (container) container.classList.remove('active');
   }
 
-   // Méthode appelée lorsque l'utilisateur sélectionne un fichier
-   onFileSelected(event: Event): void {
+  // Méthode appelée lorsque l'utilisateur sélectionne un fichier
+  onFileSelected(event: Event): void {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
       const file = fileInput.files[0];

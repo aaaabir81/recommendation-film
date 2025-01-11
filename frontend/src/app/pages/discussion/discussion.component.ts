@@ -23,7 +23,17 @@ export class DiscussionComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.initializeUserId();
     this.getDiscussions();
+  }
+
+  // Initialise l'identifiant utilisateur depuis le stockage local
+  initializeUserId(): void {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      this.userId = user.id; // Assurez-vous que l'objet utilisateur possède une propriété 'id'
+    }
   }
 
   // Récupère les discussions depuis l'API Laravel
@@ -96,7 +106,16 @@ export class DiscussionComponent implements OnInit {
       content: msg.message
     }));
   
-    const systemMessage = { role: "system", content: `You are CineChill, an expert in movie recommendations. Your capabilities include: - Providing personalized movie suggestions based on user preferences. - Offering detailed information about movies, including genres, cast, and reviews. - Assisting users in finding movies similar to those they have enjoyed. - Recommending movies for various moods and occasions. - Keeping users updated on new releases and trending movies. Respond in a friendly and engaging tone while keeping your answers relevant and to the point.`, };
+    const systemMessage = {
+      role: "system",
+      content: `You are CineChill, an expert in movie recommendations. Your capabilities include:
+      - Providing personalized movie suggestions based on user preferences.
+      - Offering detailed information about movies, including genres, cast, and reviews.
+      - Assisting users in finding movies similar to those they have enjoyed.
+      - Recommending movies for various moods and occasions.
+      - Keeping users updated on new releases and trending movies.
+      Respond in a friendly and engaging tone while keeping your answers relevant and to the point.`
+    };
   
     const apiRequestBody = {
       messages: [systemMessage, ...apiMessages],
@@ -105,7 +124,7 @@ export class DiscussionComponent implements OnInit {
     // Appel API Laravel pour traiter avec OpenAI
     this.http.post<any>('http://127.0.0.1:8000/api/CineChill-response', apiRequestBody).subscribe({
       next: (data) => {
-        console.log("Réponse reçue :", data);  // Ajouter des logs pour vérifier la réponse
+        console.log("Réponse reçue :", data);
   
         const CineChillMessageContent = data.choices?.[0]?.message?.content || "No response from CineChill.";
         const CineChillMessage = {

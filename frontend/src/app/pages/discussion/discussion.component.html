@@ -1,12 +1,12 @@
-<div class="container w-full flex py-20 px-4">
+<div class="container w-full flex flex-col lg:flex-row py-20 px-4">
   <!-- Section Historique -->
-  <div class="history w-1/4  p-4 rounded-lg shadow-md space-y-4 mr-4">
+  <div class="history w-full lg:w-1/4 p-4 rounded-lg shadow-md space-y-4 mb-4 lg:mb-0 lg:mr-4">
     <h2 class="text-lg font-semibold text-white">Historique</h2>
     <ul>
       <li *ngFor="let history of discussionsHistory" class="p-2 bg-white rounded-md shadow-sm mb-2">
         <button (click)="loadDiscussion(history)" class="w-full text-left">
           <div class="bg-white">
-            <span class="text-sm text-gray-500 bg-white">Discussion du  : </span>
+            <span class="text-sm text-gray-500 bg-white">Discussion du  :</span>
             <span class="text-sm font-semibold bg-white">{{ history.started_at }}</span>
           </div>
         </button>
@@ -15,9 +15,9 @@
   </div>
 
   <!-- Section Discussion -->
-  <div class="discussion w-3/4 flex flex-col p-4 rounded-lg shadow-md" style="min-height: 600px;">
+  <div class="discussion w-full lg:w-3/4 flex flex-col p-4 rounded-lg shadow-md" style="min-height: 600px;">
     <h2 class="text-lg font-semibold text-white mb-4">New Prompt</h2>
-    <div class="bg-red-950 p-4 rounded-lg shadow-md space-y-4 h-[400px] overflow-y-auto flex-1">
+    <div class="bg-red-950 p-4 rounded-lg shadow-md space-y-4 h-96 lg:h-[400px] overflow-y-auto flex-1">
       <ng-container *ngFor="let message of messages">
         <app-message [model]="message"></app-message>
       </ng-container>
@@ -28,3 +28,4 @@
     </div>
     <button class="bg-green-500 text-white px-4 py-2 rounded-lg mt-4" (click)="saveDiscussion()">Enregistrer Discussion</button>
   </div>
+</div>

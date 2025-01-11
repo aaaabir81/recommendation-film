@@ -1,5 +1,7 @@
 <div class="flex items-center justify-center min-h-screen bg-black">
-  <div class="container max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">  <!-- Formulaire d'inscription -->
+  <div class="container max-w-lg mx-auto  p-8 rounded-lg shadow-lg" id="container">
+
+  <!-- Formulaire d'inscription -->
   <div class="form-container sign-up" style="background-color: white;">
     <form (ngSubmit)="onSubmit()">
   
@@ -98,7 +100,7 @@
         class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition duration-200">
         Sign Up
       </button>
-      <p style="background-color: white;">Already have an account? <a href="#" (click)="toggleLogin()" style="background-color: white;">Sign In</a></p>
+      <p style="background-color: white;">Already have an account? <a (click)="toggleLogin()" style="background-color: white;">Sign In</a></p>
     </form>
   </div>
   
@@ -110,7 +112,7 @@
         <input type="email" [(ngModel)]="loginEmail" name="loginEmail" placeholder="Email" required>
         <input type="password" [(ngModel)]="loginPassword" name="loginPassword" placeholder="Password" required>
         <button type="submit">Sign In</button>
-        <p style="background-color: white;">Don't have an account? <a style="background-color: white;" href="#" (click)="toggleSignup()">Sign Up</a></p>
+        <p style="background-color: white;">Don't have an account? <a style="background-color: white;" (click)="toggleSignup()">Sign Up</a></p>
     </form>
 </div>
 
