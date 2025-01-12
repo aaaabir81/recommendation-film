@@ -14,10 +14,10 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, credentials);
   }
 
-  
   isAuthenticated(): boolean {
     return !!localStorage.getItem('authToken');
   }
+
   logout(): Observable<any> {
     const token = localStorage.getItem('authToken');
     return this.http.post(`${this.apiUrl}/logout`, {}, {
@@ -26,4 +26,10 @@ export class AuthService {
       },
     });
   }
-}
+
+  // Méthode pour récupérer l'ID de l'utilisateur connecté depuis localStorage
+  getUserId(): number {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user.id; // ou tout autre champ représentant l'ID de l'utilisateur
+  }
+}  

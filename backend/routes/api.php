@@ -35,8 +35,8 @@ Route::post('messages', [MessageController::class, 'store']);
 
 Route::post('users', [UserController::class, 'store']);
 
-Route::get('movies', [MovieController::class, 'index']); // Assurez-vous que ce contrôleur renvoie les bons résultats
 
+Route::get('movies', [MovieController::class, 'index']);
 Route::get('search/movie', [MovieController::class, 'searchMovies']);
 Route::get('trending/movie/day', [MovieController::class, 'getTrend']);
 Route::get('movie/popular', [MovieController::class, 'getPopular']);
@@ -51,6 +51,9 @@ Route::get('movie/{id}/credits', [MovieController::class, 'getMovieCredits']);
 Route::get('movie/{id}/images', [MovieController::class, 'getBackdropsImages']);
 Route::get('person/{id}', [MovieController::class, 'getPersonDetail']);
 Route::get('movie/{id}/videos', [MovieController::class, 'getMovieTrailers']);
+
+// Nouvelle route pour les recommandations
+Route::get('recommendations/{userId}', [MovieController::class, 'getRecommendations']);
 
 Route::post('/login', [UserController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/logout', [UserController::class, 'logout']);

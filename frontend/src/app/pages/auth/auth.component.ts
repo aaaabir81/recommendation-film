@@ -42,9 +42,7 @@ export class AuthComponent implements OnInit {
 
   // Fonction de gestion de la soumission de la connexion
   onLogin(): void {
-    // Réinitialiser les champs de formulaire
-    this.loginEmail = '';
-    this.loginPassword = '';
+    
 
     const credentials = { email: this.loginEmail, password: this.loginPassword };
 

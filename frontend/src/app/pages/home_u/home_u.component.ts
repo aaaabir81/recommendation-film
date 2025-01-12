@@ -6,6 +6,7 @@ import { CategoryTabComponent } from '../../components/category-tab/category-tab
 import { MovieService } from '../../services/movie.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 
 
@@ -36,6 +37,7 @@ selectedMovieId: number | null = null;
     private favoriteService: FavoriteService,
     private wishlistService: WishlistService,
     private movieService: MovieService,private router: Router,
+    private authService:AuthService
     
   ) {}
 
@@ -53,17 +55,21 @@ selectedMovieId: number | null = null;
 
   
   loadRecommendations(): void {
-    this.movieService.getMovies().subscribe({
+    const userId = this.authService.getUserId(); // Récupérer l'ID utilisateur connecté
+    console.log('User ID:', userId);
+    this.movieService.getRecommendations(userId).subscribe({
       next: (response) => {
         this.recommendations = response.results;
         this.loadingRecommendations = false;
       },
       error: (err) => {
-        console.error('Erreur lors du chargement des Recommendations :', err);
+        console.error('Erreur lors du chargement des recommandations :', err);
         this.loadingRecommendations = false;
       },
-    });
+    });    
+    
   }
+  
 
   loadFavorites(): void {
     this.favoriteService.getUserFavorites().subscribe({

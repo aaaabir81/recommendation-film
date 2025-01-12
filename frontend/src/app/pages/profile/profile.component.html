@@ -53,16 +53,14 @@
   <div
     class="bg-[#1c1c1c] rounded-lg shadow-lg w-full max-w-md mx-auto p-6 relative"
   >
-    <h2 class="text-2xl font-semibold text-gray-800 text-center mb-6">
-      Modifier le profil
-    </h2>
+    
 
 
     
     <!-- Formulaire d'édition -->
     <form (ngSubmit)="updateProfile()" class=" bg-[#1c1c1c] space-y-4">
       <div>
-        <label for="fname" class="block bg-[#1c1c1c] text-sm font-medium text-white">Prénom :</label>
+        <label for="fname" class="block bg-[#1c1c1c] text-sm font-medium text-white">First name :</label>
         <input
           type="text"
           id="fname"
@@ -74,7 +72,7 @@
       </div>
 
       <div>
-        <label for="lname" class="block text-sm font-medium bg-[#1c1c1c] text-white">Nom :</label>
+        <label for="lname" class="block text-sm font-medium bg-[#1c1c1c] text-white">Last name :</label>
         <input
           type="text"
           id="lname"
@@ -98,7 +96,7 @@
       </div>
 
       <div>
-        <label for="password" class="block text-sm  bg-[#1c1c1c] font-medium text-white">Mot de passe :</label>
+        <label for="password" class="block text-sm  bg-[#1c1c1c] font-medium text-white">Password : </label>
         <input
           type="password"
           id="password"
@@ -109,7 +107,7 @@
       </div>
 
       <div>
-        <label for="birth_date" class="block text-sm bg-[#1c1c1c] font-medium text-white">Date de naissance :</label>
+        <label for="birth_date" class="block text-sm bg-[#1c1c1c] font-medium text-white">Date of birth :</label>
         <input
           type="date"
           id="birth_date"
@@ -120,21 +118,21 @@
       </div>
 
       <div>
-        <label for="genre" class="block text-sm bg-[#1c1c1c] font-medium text-white">Genre :</label>
+        <label for="genre" class="block text-sm bg-[#1c1c1c] font-medium text-white">Gender :</label>
         <select
           id="genre"
           [(ngModel)]="user.genre"
           name="genre"
           class="block w-full p-2 border text-slate-200 bg-[#1c1c1c] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
-          <option value="Male">Homme</option>
-          <option value="Female">Femme</option>
+          <option value="Male">Man</option>
+          <option value="Female">Woman</option>
           <option value="Other">Autre</option>
         </select>
       </div>
 
       <div>
-        <label for="preferred_type" class="block text-sm  bg-[#1c1c1c] font-medium text-white">Type préféré :</label>
+        <label for="preferred_type" class="block text-sm  bg-[#1c1c1c] font-medium text-white">Preffered type :</label>
         <select
           id="preferred_type"
           [(ngModel)]="user.preferred_type"
@@ -142,17 +140,17 @@
           class="block w-full p-2 border text-slate-200 bg-[#1c1c1c] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
           <option value="Movie">Film</option>
-          <option value="Series">Série</option>
+          <option value="Series">Movie</option>
         </select>
       </div>
 
-      <label for="profile_picture" class="block font-medium text-gray-700">Changer la photo de profil :</label>
+      <label for="profile_picture" class="block font-medium text-slate-200 bg-[#1c1c1c] ">Update your profile picture :</label>
       <input 
         type="file" 
         id="profile_picture" 
         (change)="onFileSelected($event)" 
         accept="image/*" 
-        class="mb-4"
+        class="mb-4 bg-[#1c1c1c]"
       />
 
       
@@ -164,13 +162,13 @@
           (click)="closeEditModal()"
           class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
         >
-          Annuler
+          Cancel
         </button>
         <button
           type="submit"
           class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
         >
-          Enregistrer
+          Update
         </button>
       </div>
     </form>

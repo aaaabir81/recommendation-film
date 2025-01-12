@@ -7,12 +7,17 @@ import { environment } from '../environments/environments';
   providedIn: 'root'
 })
 export class MovieService {
-  private apiUrl = `${environment.apiUrl}/movies`;
+  private apiUrl = `${environment.apiUrl}`;
 
   constructor(private http: HttpClient) { }
 
+  getRecommendations(userId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/recommendations/${userId}`);
+  }
+  
+
   getMovies(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+    return this.http.get<any>(`${this.apiUrl}/movies`);
   }
   
 }

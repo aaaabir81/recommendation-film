@@ -54,12 +54,21 @@ export class DiscussionComponent implements OnInit {
   // Charge une discussion spécifique et ouvre la modal
   loadDiscussion(history: any): void {
     this.http.get<any[]>(`http://127.0.0.1:8000/api/discussions/messages/${history.id}`).subscribe(messages => {
+      if (messages && messages.length > 0) {
+        // Trier les messages selon "sent_at" (en ordre croissant, du plus ancien au plus récent)
+        messages.sort((a, b) => {
+          const dateA = new Date(a.sent_at).getTime(); // Convertir sent_at en timestamp
+          const dateB = new Date(b.sent_at).getTime();
+          return dateA - dateB; // Tri croissant
+        });
+      }
+  
       document.querySelector('app-root')?.setAttribute('inert', 'true');
-      
+  
       const dialogRef = this.dialog.open(DiscussionModalComponent, {
         data: { messages }
       });
-
+  
       dialogRef.afterClosed().subscribe(() => {
         document.querySelector('app-root')?.removeAttribute('inert');
       });
@@ -67,6 +76,7 @@ export class DiscussionComponent implements OnInit {
       console.error('Error loading discussion:', error);
     });
   }
+  
 
   // Envoie un message et le traite avec l'API CineChill
   handleSend(): void {

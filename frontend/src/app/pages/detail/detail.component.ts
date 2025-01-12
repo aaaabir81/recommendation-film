@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css'],
-  imports:[CommonModule, WatchlistComponent, TimeFormatPipe, AboutMoviesComponent, ReviewsComponent, CastComponent, FormsModule]
+  imports:[CommonModule, TimeFormatPipe, AboutMoviesComponent, ReviewsComponent, CastComponent, FormsModule]
 })
 export class DetailComponent implements OnInit {
   movieId: string | null = null;
